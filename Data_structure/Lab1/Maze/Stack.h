@@ -9,25 +9,12 @@ typedef struct intstack
 {
     int top;
     int data[MAXLENGTH];
-} Istack;
+} stack;
 
-typedef struct charstack
-{
-    int top;
-    char data[MAXLENGTH];
-}Cstack;
-
-
-void ICreat(Istack *s);             //创建空栈
-void IMakNull(Istack *s);           //将栈置空
-int ITop(Istack *s);                //返回栈顶值
-void IPop(Istack *s);               //弹栈
-void IPush(Istack *s, int element); //压栈
-
-void CCreat(Cstack *s);
-void CMakeNull(Cstack *s);
-char CTop(Cstack *s);
-void CPop(Cstack *s);
-void CPush(Cstack *s,char element);
+void Creat(stack *s);             //创建空栈
+void MakNull(stack *s);           //将栈置空
+int Top(stack *s);                //返回栈顶值
+void Pop(stack *s);               //弹栈
+void Push(stack *s, int element); //压栈
 
 #endif
