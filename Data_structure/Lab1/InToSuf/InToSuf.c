@@ -51,103 +51,140 @@ void InToSuf(char In[],char suf[])
         case '+':
             if(s->top==MAXLENGTH)
             {
+                printf("meet +,stack is empty,push +\n");
                 CPush(s,'+');
+                CShowStack(s);
             }
             else if(Judge('+',CTop(s))==1)
             {
+                printf("meet +,The top element of the stack is%c,output +\n",CTop(s));
                 suf[j]='+';
                 j++;
             }
             else if(Judge('+',CTop(s))==0)
             {
+                printf("meet +,The top element of the stack is%c,push +\n",CTop(s));
                 CPush(s,'+');
+                CShowStack(s);
             }
             else
             {
+                printf("meet +,The top element of the stack is%c,output top element %c,push +\n",CTop(s),CTop(s));
                 suf[j]=CTop(s);
                 CPop(s);CPush(s,'+');
+                CShowStack(s);
                 j++;
             }
             break;
         case '-':
+            printf("meet -,");
             if(s->top==MAXLENGTH)
             {
+                printf("stack is empty,push -\n");
                 CPush(s,'-');
+                CShowStack(s);
             }
             else if(Judge('-',CTop(s))==1)
             {
+                printf("The top element of the stack is%c,output -\n",CTop(s));
                 suf[j]='-';
                 j++;
             }
             else if(Judge('-',CTop(s))==0)
             {
+                printf("The top element of the stack is%c,push -\n",CTop(s));
                 CPush(s,'-');
+                CShowStack(s);
             }
             else
             {
+                printf("The top element of the stack is%c,output top element%c,push -\n",CTop(s),CTop(s));
                 suf[j]=CTop(s);
                 CPop(s);CPush(s,'-');
+                CShowStack(s);
                 j++;
             }
             break;
         case '*':
+            printf("meet *,");
             if(s->top==MAXLENGTH)
             {
+                printf("stack is empty,push *\n");
                 CPush(s,'*');
+                CShowStack(s);
             }
             else if(Judge('*',CTop(s))==1)
             {
+                printf("The top element of the stack is%c,output *\n",CTop(s));
                 suf[j]='*';
                 j++;
             }
             else if(Judge('*',CTop(s))==0)
             {
+                printf("The top element of the stack is%c,push *\n",CTop(s));
                 CPush(s,'*');
+                CShowStack(s);
             }
             else
             {
+                printf("The top element of the stack is%c,output top element%c,push *\n",CTop(s),CTop(s));
                 suf[j]=CTop(s);
                 CPop(s);CPush(s,'*');
+                CShowStack(s);
                 j++;
             }
             break;
         case '/':
+            printf("meet /,");
             if(s->top==MAXLENGTH)
             {
+                printf("stack is empty,push /\n");
                 CPush(s,'/');
+                CShowStack(s);
             }
             else if(Judge('/',CTop(s))==1)
             {
+                printf("The top element of the stack is%c,output /\n",CTop(s));
                 suf[j]='/';
                 j++;
             }
             else if(Judge('/',CTop(s))==0)
             {
+                printf("The top element of the stack is%c,push /\n",CTop(s));
                 CPush(s,'/');
+                CShowStack(s);
             }
             else
             {
+                printf("The top element of the stack is%c,output top element%c,push /\n",CTop(s),CTop(s));
                 suf[j]=CTop(s);
                 CPop(s);CPush(s,'/');
+                CShowStack(s);
                 j++;
             }
             break;
         case '(':
+            printf("meet (,push (\n");
             CPush(s,'(');
+            CShowStack(s);
             break;
         case ')':
+            printf("meet ),output stack element until meet (\n");
             for(;CTop(s)!='(';j++)
             {
                 suf[j]=CTop(s);
                 CPop(s);
             }
             CPop(s);
+            CShowStack(s);
             break;
         default:
+            printf("meet number,output\n");
             suf[j]=In[i];j++;
             break;
         }
     }
+    printf("Output the remaining elements in the stack\n");
     for(;s->top!=MAXLENGTH;j++)
     {
         suf[j]=CTop(s);

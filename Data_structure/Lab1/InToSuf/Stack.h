@@ -15,19 +15,20 @@ typedef struct charstack
 {
     int top;
     char data[MAXLENGTH];
-}Cstack;
-
+} Cstack;
 
 void ICreat(Istack *s);             //创建空栈
 void IMakNull(Istack *s);           //将栈置空
 int ITop(Istack *s);                //返回栈顶值
 void IPop(Istack *s);               //弹栈
 void IPush(Istack *s, int element); //压栈
+void IShowStack(Istack *s);         //显示栈内容，从栈底开始
 
-void CCreat(Cstack *s);
-void CMakeNull(Cstack *s);
-char CTop(Cstack *s);
-void CPop(Cstack *s);
-void CPush(Cstack *s,char element);
+void CCreat(Cstack *s);              //创建空栈
+void CMakeNull(Cstack *s);           //将栈置空
+char CTop(Cstack *s);                //返回栈顶值
+void CPop(Cstack *s);                //弹栈
+void CPush(Cstack *s, char element); //压栈
+void CShowStack(Cstack *s);          //显示栈内容，从栈底开始
 
 #endif

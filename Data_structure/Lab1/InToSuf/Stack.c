@@ -24,6 +24,17 @@ void IPush(Istack * s,int element)//压栈
     s->data[s->top]=element;
     
 }
+void IShowStack(Istack *s)
+{
+    int i=MAXLENGTH-1;
+    for(i;i>=s->top;i--)
+    {
+        printf("%d ",s->data[i]);
+    }
+    printf("\n");
+}
+
+
 
 void CCreat(Cstack *s)
 {
@@ -46,4 +57,13 @@ void CPush(Cstack *s,char element)
 {
     s->top--;
     s->data[s->top]=element;
+}
+void CShowStack(Cstack *s)
+{
+    int i=MAXLENGTH-1;
+    for(;i>=s->top;i--)
+    {
+        printf("%c ",s->data[i]);
+    }
+    printf("\n");
 }

@@ -17,6 +17,8 @@ int evaluation(char * suf)
             y=ITop(s);
             IPop(s);
             IPush(s,y+x);
+            printf("meet +,pop two number %d %d,then push %d+%d\n",x,y,y,x);
+            IShowStack(s);
             break;
         case '-':
             x=ITop(s);
@@ -24,6 +26,8 @@ int evaluation(char * suf)
             y=ITop(s);
             IPop(s);
             IPush(s,y-x);
+            printf("meet -,pop two number %d %d,then push %d-%d\n",x,y,y,x);
+            IShowStack(s);
             break;
         case '*':
             x=ITop(s);
@@ -31,6 +35,8 @@ int evaluation(char * suf)
             y=ITop(s);
             IPop(s);
             IPush(s,y*x);
+            printf("meet *,pop two number %d %d,then push %d*%d\n",x,y,y,x);
+            IShowStack(s);
             break;
         case '/':
             x=ITop(s);
@@ -38,9 +44,13 @@ int evaluation(char * suf)
             y=ITop(s);
             IPop(s);
             IPush(s,y/x);
+            printf("meet /,pop two number %d %d,then push %d/%d\n",x,y,y,x);
+            IShowStack(s);
             break;
         default:
+            printf("meet number,push\n");
             IPush(s,*p-'0');
+            IShowStack(s);
             break;
         }
     }
