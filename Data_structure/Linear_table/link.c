@@ -37,7 +37,7 @@ int main (void)
 			printf("please enter element to delete:");
 			int element;
 			scanf("%d",&element);
-			OutPutLink(head1);
+			//OutPutLink(head1);
 			DeletElement(head1,element);
 			OutPutLink(head1);
 		}
@@ -64,7 +64,7 @@ int main (void)
 					p=q;
 				}
 			}
-			OutPutLink(head1);
+			//OutPutLink(head1);
 			DeletRepeatElement(head1);
 			OutPutLink(head1);
 		}
@@ -91,7 +91,7 @@ int main (void)
 					p=q;
 				}
 			}
-			OutPutLink(head1);
+			//OutPutLink(head1);
 			InvertedLinkList(head1);
 			OutPutLink(head1);
 		}
@@ -118,7 +118,7 @@ int main (void)
 					p=q;
 				}
 			}
-			OutPutLink(head1);
+			//OutPutLink(head1);
 			int k;
 			printf("enter the number of digits to move:");
 			scanf("%d",&k);
@@ -148,7 +148,7 @@ int main (void)
 					p=q;
 				}
 			}
-			OutPutLink(head1);
+			//OutPutLink(head1);
 			int k;
 			printf("enter the number of digits to move:");
 			scanf("%d",&k);
@@ -199,7 +199,7 @@ int main (void)
 					p=q;
 				}
 			}
-			OutPutLink(head1);OutPutLink(head2);
+			//OutPutLink(head1);OutPutLink(head2);
 			intlink*re=(intlink*)malloc(sizeof(intlink));
 			re->next=MergeList(head1->next,head2->next);
 			OutPutLink(re);

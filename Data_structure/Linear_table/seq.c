@@ -19,7 +19,7 @@ int main (void)
         printf("please enter element to delete:");
         int element;
         scanf("%d",&element);
-        OutPut(l1);
+        //OutPut(l1);
         DeleteElement(l1,element);
         OutPut(l1);
         break;
@@ -29,7 +29,7 @@ int main (void)
         printf("enter %d element:(must be orderly)\n",num);
         CreatList(l1);
         InitializeList(l1,num);
-        OutPut(l1);
+        //OutPut(l1);
         DeleteRepeatElement(l1);
         OutPut(l1);
         break;
@@ -39,7 +39,7 @@ int main (void)
         printf("enter %d element:\n",num);
         CreatList(l1);
         InitializeList(l1,num);
-        OutPut(l1);
+        //OutPut(l1);
         Inverted(l1);
         OutPut(l1);
         break;
@@ -51,7 +51,7 @@ int main (void)
         InitializeList(l1,num);
         printf("enter the number of digits to move:");
 		scanf("%d",&k);
-        OutPut(l1);
+        //OutPut(l1);
         MoveLeft(l1,k);
         OutPut(l1);
         break;
@@ -63,7 +63,7 @@ int main (void)
         InitializeList(l1,num);
         printf("enter the number of digits to move:");
 		scanf("%d",&k);
-        OutPut(l1);
+        //OutPut(l1);
         MoveRight(l1,k);
         OutPut(l1);
         break;
@@ -79,7 +79,7 @@ int main (void)
         printf("enter %d element:\n",num);
         CreatList(l2);
         InitializeList(l2,num);
-        OutPut(l1);OutPut(l2);
+        //OutPut(l1);OutPut(l2);
         SeqList * r=(SeqList *)malloc(sizeof(SeqList));
         Merge(l1,l2,&r);
         OutPut(r);

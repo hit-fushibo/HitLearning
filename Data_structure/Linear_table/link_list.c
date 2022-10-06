@@ -199,7 +199,7 @@ int MoveLeft(intlink *head, int k)
 int MoveRight(intlink *head, int k)
 {
     int i = 0;
-    intlink *q;
+    intlink *q=head;
     if (q->next == NULL)
         return 0;
     if (q->next->next == NULL)
