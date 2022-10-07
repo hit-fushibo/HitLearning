@@ -8,17 +8,18 @@
 
 #define MAXLENGTH 100
 
-typedef struct BtStack
-{
-    BTreeNode data[MAXLENGTH];
-    int top;
-} BtStack;
-
 typedef struct bintree
 {
     int data;
     struct bintree *lchild;
     struct bintree *rchild;
 } BTreeNode;
+
+typedef struct BtStack
+{
+    BTreeNode data[MAXLENGTH];
+    int top;
+} BtStack;
+
 
 #endif

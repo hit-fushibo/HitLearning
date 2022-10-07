@@ -64,6 +64,19 @@ BTreeNode *TestCreatBT(int depth)
     root->rchild=TestCreatBT(depth-1);
 }
 
+//判断两个根节点是否相同
+int JudgeEqul(BTreeNode *a,BTreeNode *b)
+{
+    if(a->data==b->data&&a->lchild==b->lchild&&a->rchild==b->rchild)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 //递归先序遍历
 void RecPreOrder(BTreeNode * bt)
 {
@@ -80,7 +93,7 @@ void RecPreOrder(BTreeNode * bt)
 }
 
 //递归中序遍历
-void RecInOredr(BTreeNode * bt)
+void RecInOrder(BTreeNode * bt)
 {
     if(bt==NULL)
     {
@@ -88,9 +101,9 @@ void RecInOredr(BTreeNode * bt)
     }
     else
     {
-        RecPreOrder(bt->lchild);
+        RecInOrder(bt->lchild);
         printf("%d ",Data(bt));
-        RecPreOrder(bt->rchild);
+        RecInOrder(bt->rchild);
     }
 }
 
@@ -103,8 +116,8 @@ void RecPostOrder(BTreeNode * bt)
     }
     else
     {
-        RecPreOrder(bt->lchild);
-        RecPreOrder(bt->rchild);
+        RecPostOrder(bt->lchild);
+        RecPostOrder(bt->rchild);
         printf("%d ",Data(bt));
     }
 }
@@ -112,7 +125,26 @@ void RecPostOrder(BTreeNode * bt)
 //循环先序遍历
 void CirPreOrder(BTreeNode * bt)
 {
-
+    BtStack *s=(BtStack*)malloc(sizeof(BtStack));
+    Creat(s);
+    BTreeNode *temp=(BTreeNode*)malloc(sizeof(BTreeNode));
+    temp=bt;
+    while(s->top!=MAXLENGTH||temp)
+    {
+        if(temp)
+        {
+            printf("%d ",temp->data);
+            Push(s,*temp);
+            temp=temp->lchild;
+        }
+        else
+        {
+            temp=(BTreeNode*)malloc(sizeof(BTreeNode));
+            *temp=Top(s);Pop(s);
+            temp=temp->rchild;
+        }
+    }
+    printf("\n");
 }
 
 //循环中序遍历
@@ -120,17 +152,18 @@ void CirInOrder(BTreeNode *bt)
 {
     BtStack *s=(BtStack *)malloc(sizeof(BtStack));
     Creat(s);
-    BTreeNode *temp=(BtStack *)malloc(sizeof(BtStack));
+    BTreeNode *temp=(BTreeNode *)malloc(sizeof(BTreeNode));
     temp=bt;
-    while (s->top!=MAXLENGTH||!IsEmpty(temp))
+    while (s->top!=MAXLENGTH||temp)
     {
-        if(!IsEmpty(temp))
+        if(temp)
         {
             Push(s,*temp);
             temp=temp->lchild;
         }
         else
         {
+            temp=(BTreeNode*)malloc(sizeof(BTreeNode));
             *temp=Top(s);Pop(s);
             printf("%d ",Data(temp));
             temp=temp->rchild;
@@ -142,5 +175,50 @@ void CirInOrder(BTreeNode *bt)
 //循环后序遍历
 void CirPostOrder(BTreeNode *bt)
 {
-
+    int flag[MAXLENGTH]={0},i=MAXLENGTH-1;
+    BtStack *s=(BtStack *)malloc(sizeof(BtStack));
+    Creat(s);
+    BTreeNode *temp=(BTreeNode *)malloc(sizeof(BTreeNode));
+    temp=bt;
+    while(s->top!=MAXLENGTH||temp)
+    {
+        if(temp)
+        {
+            if(s->top==MAXLENGTH)
+            {
+                Push(s,*temp);
+                flag[i]=1;i--;
+                temp=temp->lchild;
+            }
+            else
+            {
+                if(flag[i]==0)
+                {
+                    Push(s,*temp);
+                    flag[i]=1;i--;
+                    temp=temp->lchild;
+                }
+                else if(flag[i]==1)
+                {
+                    temp=temp->rchild;
+                    flag[i]=2;i--;
+                }
+                else
+                {
+                    flag[i]=0;
+                    printf("%d ",temp->data);
+                    if(JudgeEqul(temp,bt))
+                    break;
+                    Pop(s);i++;
+                    *temp=Top(s);
+                }
+            }
+            
+        }
+        else
+        {
+            temp=(BTreeNode*)malloc(sizeof(BTreeNode));
+            *temp=Top(s);i++;
+        }
+    }
 }

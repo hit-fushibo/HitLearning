@@ -11,10 +11,11 @@ BTreeNode *Rchild(BTreeNode *bt);                           //返回bt的右儿�
 int Data(BTreeNode *bt);                                    //返回bt的根节点的数据域
 BTreeNode *TestCreatBT(int depth);                          //生成测试用二叉树，顺序为先序顺序，深度为depth的满二叉树，手动输入数据
 void RecPreOrder(BTreeNode *bt);                            //递归先序遍历
-void RecInOredr(BTreeNode *bt);                             //递归中序遍历
+void RecInOrder(BTreeNode *bt);                             //递归中序遍历
 void RecPostOrder(BTreeNode *bt);                           //递归后序遍历
 void CirPreOrder(BTreeNode *bt);                            //循环先序遍历
 void CirInOrder(BTreeNode *bt);                             //循环中序遍历
 void CirPostOrder(BTreeNode *bt);                           //循环后序遍历
+int JudgeEqul(BTreeNode *a,BTreeNode *b);//判断两个根节点是否相同
 
 #endif
