@@ -1,60 +1,68 @@
-#include"Suf.h"
+#include "Suf.h"
 
-int evaluation(char * suf)
+//后缀表达式求值
+float evaluation(char *suf)
 {
-    Istack *s=(Istack*)malloc(sizeof(Istack));
-    char *p=suf;
-    int x,y;
+    Istack *s = (Istack *)malloc(sizeof(Istack));
+    char *p = suf;
+    float x = 0, y = 0;
     ICreat(s);
-    for(;*p!='\0';p++)
+    for (; *p != '\0'; p++)
     {
-        if(*p=='\0')break;
+        if (*p == '\0')
+            break;
         switch (*p)
         {
         case '+':
-            x=ITop(s);
+            x = ITop(s);
             IPop(s);
-            y=ITop(s);
+            y = ITop(s);
             IPop(s);
-            IPush(s,y+x);
-            printf("meet +,pop two number %d %d,then push %d+%d\n",x,y,y,x);
+            IPush(s, y + x); //注意运算顺序
+            printf("meet +,pop two number %f %f,then push %f+%f\n", x, y, y, x);
             IShowStack(s);
+            p++;
             break;
         case '-':
-            x=ITop(s);
+            x = ITop(s);
             IPop(s);
-            y=ITop(s);
+            y = ITop(s);
             IPop(s);
-            IPush(s,y-x);
-            printf("meet -,pop two number %d %d,then push %d-%d\n",x,y,y,x);
+            IPush(s, y - x); //注意运算顺序
+            printf("meet -,pop two number %f %f,then push %f-%f\n", x, y, y, x);
             IShowStack(s);
+            p++;
             break;
         case '*':
-            x=ITop(s);
+            x = ITop(s);
             IPop(s);
-            y=ITop(s);
+            y = ITop(s);
             IPop(s);
-            IPush(s,y*x);
-            printf("meet *,pop two number %d %d,then push %d*%d\n",x,y,y,x);
+            IPush(s, y * x); //注意运算顺序
+            printf("meet *,pop two number %f %f,then push %f*%f\n", x, y, y, x);
             IShowStack(s);
+            p++;
             break;
         case '/':
-            x=ITop(s);
+            x = ITop(s);
             IPop(s);
-            y=ITop(s);
+            y = ITop(s);
             IPop(s);
-            IPush(s,y/x);
-            printf("meet /,pop two number %d %d,then push %d/%d\n",x,y,y,x);
+            IPush(s, y / x); //注意运算顺序
+            printf("meet /,pop two number %f %f,then push %f/%f\n", x, y, y, x);
             IShowStack(s);
+            p++;
             break;
         default:
             printf("meet number,push\n");
-            IPush(s,*p-'0');
+            x = strtof(p, &p); //获取数字函数
+            printf("%f \n", x);
+            IPush(s, x);
             IShowStack(s);
             break;
         }
     }
-    x=ITop(s);
+    x = ITop(s);
     IPop(s);
     return x;
 }

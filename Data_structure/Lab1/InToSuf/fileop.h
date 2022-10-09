@@ -5,6 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-void ReadInfix(FILE * fp,char * In);
+void ReadInfix(FILE *fp, char *In); //读取输入
 
 #endif
