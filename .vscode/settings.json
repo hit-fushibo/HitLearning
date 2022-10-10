@@ -37,6 +37,7 @@
     "initializer_list": "c",
     "utility": "c",
     "stdio.h": "c",
-    "information_management.h": "c"
+    "information_management.h": "c",
+    "btque.h": "c"
   }
 }

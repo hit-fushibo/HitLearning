@@ -222,3 +222,23 @@ void CirPostOrder(BTreeNode *bt)
         }
     }
 }
+
+//层序遍历二叉树
+void LatOrder(BTreeNode *bt)
+{
+    if(IsEmpty(bt))
+    {
+        BtQue *q=(BtQue*)malloc(sizeof(BtQue));
+        CreatQueue(q);
+        EnQueue(q,*bt);
+        while (QueueEmpty(q))
+        {
+            BTreeNode temp=GetHead(q);
+            printf("%d ",temp.data);
+            if(temp.lchild)EnQueue(q,*temp.lchild);
+            if(temp.rchild)EnQueue(q,*temp.rchild);
+            DeQueue(q);
+        }
+        printf("\n");
+    }
+}

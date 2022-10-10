@@ -1,7 +1,7 @@
 #ifndef BINTREE_H
 #define BINTREE_H
 
-#include"BtStack.h"
+#include "BtQue.h"
 
 void Empty(BTreeNode *bt);                                  //建立一颗空的二叉树
 int IsEmpty(BTreeNode *bt);                                 //判断二叉树是否为空，空返回0，否则返回1
@@ -16,6 +16,7 @@ void RecPostOrder(BTreeNode *bt);                           //递归后序遍历
 void CirPreOrder(BTreeNode *bt);                            //循环先序遍历
 void CirInOrder(BTreeNode *bt);                             //循环中序遍历
 void CirPostOrder(BTreeNode *bt);                           //循环后序遍历
-int JudgeEqul(BTreeNode *a,BTreeNode *b);//判断两个根节点是否相同
+int JudgeEqul(BTreeNode *a, BTreeNode *b);                  //判断两个根节点是否相同
+void LatOrder(BTreeNode *bt);                               //层序遍历二叉树
 
 #endif

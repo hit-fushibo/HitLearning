@@ -2,6 +2,7 @@
 
 #include"BinTree.c"
 #include"BtStack.c"
+#include"BtQue.c"
 
 int main (void)
 {
@@ -9,8 +10,6 @@ int main (void)
     scanf("%d",&depth);
     BTreeNode * root=(BTreeNode * )malloc(sizeof(BTreeNode));
     root=TestCreatBT(depth);
-    CirPostOrder(root);
-    printf("\n");
-    RecPostOrder(root);
+    LatOrder(root);
     return 0;
 }

@@ -21,5 +21,11 @@ typedef struct BtStack
     int top;
 } BtStack;
 
+typedef struct BtQue
+{
+    BTreeNode data[MAXLENGTH];
+    int l; 
+} BtQue;
+
 
 #endif
