@@ -6,10 +6,17 @@
 
 int main (void)
 {
-    int depth=0;
-    scanf("%d",&depth);
-    BTreeNode * root=(BTreeNode * )malloc(sizeof(BTreeNode));
-    root=TestCreatBT(depth);
+    //BTreeNode * root=(BTreeNode * )malloc(sizeof(BTreeNode));
+    //int depth=0;
+    //scanf("%d",&depth);
+    //root=TestCreatBT(depth);
+    
+    BTreeNode *root=(BTreeNode *)malloc(sizeof(BTreeNode));
+    char test[100]={0};
+    gets(test);
+    CreatBt(&root,test);
     LatOrder(root);
+    BinWide(root,0);
+    printf("%d",bin_width);
     return 0;
 }

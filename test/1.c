@@ -2,12 +2,16 @@
 
 int main (int argc,char *argv[])
 {
-    int a[16]={10,2,14,7,8,12,15,11,0,4,1,13,3,9,6,5};
-    int i=0,j,k=0;
-    for(i=0;i<16;i++)
+    char *p;
+    char a[5]={"abc"};
+    p=a+3;
+    if(p==NULL)
     {
-        k+=a[i];
+        printf("1");
     }
-    printf("%d",k);
+    else
+    {
+        printf("2");
+    }
     return 0;
 }

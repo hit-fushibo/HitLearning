@@ -50,6 +50,30 @@ int Data(BTreeNode * bt)
     return bt->data;
 }
 
+//根据字符串p生成二叉树，p先序序列，data之间用空格区分，data为空格代表为空节点
+char * CreatBt(BTreeNode **bt,char * p)
+{
+    if(*p>='0'&&*p<='9')
+    {
+        (*bt)->lchild=(BTreeNode *)malloc(sizeof(BTreeNode));
+        (*bt)->rchild=(BTreeNode *)malloc(sizeof(BTreeNode));
+        int data=(int)strtof(p,&p);
+        (*bt)->data=data;
+        p++;
+        p=CreatBt(&((*bt)->lchild),p);
+        p=CreatBt(&((*bt)->rchild),p);
+    }
+    else
+    {
+        *bt=NULL;
+        if(*p!='\0')
+        {
+            p++;p++;
+        }
+    }
+    return p;
+}
+
 //生成测试用二叉树
 BTreeNode *TestCreatBT(int depth)
 {
@@ -240,5 +264,64 @@ void LatOrder(BTreeNode *bt)
             DeQueue(q);
         }
         printf("\n");
+    }
+}
+
+//判断是否完全二叉树
+int JudgeCBT(BTreeNode *bt)
+{
+    char lat[128]={0};
+    JudgeFunc(bt,1,lat);
+    lat[0]='T';
+    int i=0;
+    int flag1=0,flag2=1;
+    for(i;i<strlen(lat);i++)
+    {
+        if(flag1==0)
+        {
+            if(lat[i]=='F')
+            flag1=1;
+        }
+        else
+        {
+            if(lat[i]=='T')
+            {
+                flag2=0;
+                break;
+            }
+        }
+    }
+    return flag2;
+}
+
+//将二叉树以层序顺序输出到lat中
+void JudgeFunc(BTreeNode*bt,int i,char *lat)
+{
+    if(bt)
+    {
+        lat[i]='T';
+        JudgeFunc(bt->lchild,2*i,lat);
+        JudgeFunc(bt->rchild,2*i+1,lat);
+    }
+    else
+    {
+        lat[i]='F';
+    }
+    return;
+}
+
+//求二叉树的宽度
+void BinWide(BTreeNode *bt,int k)
+{
+    if(bt)
+    {
+        bin_wide[k]++;
+        if(bin_wide[k]>bin_width)bin_width=bin_wide[k];
+        BinWide(bt->lchild,k+1);
+        BinWide(bt->rchild,k+1);
+    }
+    else
+    {
+        return ;
     }
 }
