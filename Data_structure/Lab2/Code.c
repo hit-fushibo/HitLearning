@@ -131,3 +131,19 @@ void HuffmanCode(char **s,HuT*root,char *buffer,int depth)
     Code(s,root,buffer,0);
     codectn=0;
 }
+
+//将data的内容根据hufcode编码到code
+void CodeString(char *data,char **Hufcode,char *code)
+{
+    int data_i=0,huf_i=0,code_i=0,len=strlen(data),j=0;
+    for(data_i=0;data_i<len;data_i++)
+    {
+        for(huf_i=0;data[data_i]!=*Hufcode[huf_i];huf_i++);
+        for(j=2;Hufcode[huf_i][j]!='\0';j++)
+        {
+            code[code_i]=Hufcode[huf_i][j];
+            code_i++;
+        }
+    }
+    code[code_i]='\0';
+}
