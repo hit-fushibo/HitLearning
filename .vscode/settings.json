@@ -38,6 +38,7 @@
     "utility": "c",
     "stdio.h": "c",
     "information_management.h": "c",
-    "btque.h": "c"
+    "btque.h": "c",
+    "string": "c"
   }
 }
