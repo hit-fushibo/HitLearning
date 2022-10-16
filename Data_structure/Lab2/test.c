@@ -28,7 +28,7 @@ int main (void)
         a[0][3]='\0';
         OutputHufcode(a,kind);
         int len=strlen(input);
-        char *code=(char *)malloc(sizeof(char)*len);
+        char *code=(char *)malloc(sizeof(char)*len*10);
         CodeString(input,a,code);
         OutputCode(code);
         char *Dedata=(char*)malloc(sizeof(char)*100);
@@ -54,9 +54,11 @@ int main (void)
         char *Dedata=(char*)malloc(sizeof(char)*10000);
         Decode(Dedata,huffmacode,code);
         OutputData(Dedata);
-        //printf("%s\n",code);
+        int ziplen;
+        ziplen=CompressCode(code);
+        char *decode;
+        ReadCompressCode(&decode,ziplen);
+        OutputDecode(decode);
     }
-
-    
     return 0;
 }
