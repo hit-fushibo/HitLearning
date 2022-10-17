@@ -13,6 +13,7 @@ The Keynesian logic of extrapolation starts with full employment:
 4. The absence of government intervention is to allow the lack of effective demand to continue, to allow unemployment and crisis to continue; Governments need to use fiscal rather than monetary policy to stimulate the economy and increase investment to make up for the lack of effective demand in private markets.
 
 After summarizing and integrating a large number of macro concepts from a macro perspective, Keynes made the development of economics jump out of the limit of price analysis, thus opening a new page of economics in the 20th century
+
 Now let me introduce you to the main content of Keynesianism.
 
 Keynesianism (also known as "Keynesian economics") is an economic theory based on the ideas of John Maynard Keynes's book The General Theory of Employment, Interest and Money. It is advocated that the country adopt expansionary economic policies to promote economic growth by increasing demand. That is, expand government spending, Implement deficit finance, stimulate the economy, and sustain prosperity. Keynesian economic theory states that Macro economic trends constrain individual specific behaviors. Political economy or economics since the late 18th century has been based on the idea of increasing production to increase economic output. Keynes, on the other hand, believed that the decline in aggregate demand for goods was the main cause of the recession. From this point of view, he argues that Measures to maintain the balance of overall economic activity data can macroscopically balance supply and demand. So Keynes and other economic theories based on Keynesian theory are called macroeconomics, as distinct from microeconomics, which focuses on the study of individual behavior.
@@ -28,3 +29,224 @@ The Keynesian logic of extrapolation starts with full employment:
 4. The absence of government intervention is to allow the lack of effective demand to continue, to allow unemployment and crisis to continue; Governments need to use fiscal rather than monetary policy to stimulate the economy and increase investment to make up for the lack of effective demand in private markets.
 
 After summarizing and integrating a large number of macro concepts from a macro perspective, Keynes made the development of economics jump out of the limit of price analysis, thus opening a new page of economics in the 20th century
+GetHufcode(huffmacode);
+int ziplen=test(code);
+        char *decode;
+        test1(&decode,ziplen);
+        char *Dedata=(char*)malloc(sizeof(char)*10000);
+        Decode(Dedata,huffmacode,decode);
+        OutputData(Dedata);
+#include"Code.h"
+#include"Decode.h"
+#include"Fileop.h"
+
+#include"Code.c"
+#include"Decode.c"
+#include"Fileop.c"
+
+int main (void)
+{
+    CW *Weight;
+    int kind=0;
+    char *input;
+    GetData(&input);
+    kind=GetWeights(input,&Weight);
+    if(kind==1)
+    {
+        char **a=(char **)malloc(sizeof(char *));
+        for(int i=0;i<kind;i++)
+        {
+            a[i]=(char*)malloc(sizeof(char)*4);
+        }
+        a[0][0]=input[0];
+        a[0][1]=' ';
+        a[0][2]='1';
+        a[0][3]='\0';
+        OutputHufcode(a,kind);
+        int len=strlen(input);
+        char *code=(char *)malloc(sizeof(char)*len*10);
+        CodeString(input,a,code);
+        OutputCode(code);
+        char *Dedata=(char*)malloc(sizeof(char)*100);
+        Decode(Dedata,a,code);
+        OutputData(Dedata);
+    }
+    else
+    {
+        HuT *w=CreatNode(Weight,kind);
+        HuT *root=CreatHuffman(w,kind);
+        char **huffmacode=(char **)malloc(sizeof(char *)*kind);
+        for(int i=0;i<kind;i++)
+        {
+            huffmacode[i]=(char*)malloc(sizeof(char)*(kind));
+        }
+        char buffer[100]={0};
+        HuffmanCode(huffmacode,root,buffer,0);
+        OutputHufcode(huffmacode,kind);
+        int len=strlen(input);
+        char *code=(char *)malloc(sizeof(char)*len*strlen(huffmacode[kind-1]));
+        CodeString(input,huffmacode,code);
+        int ziplen=test(code);
+        char *decode;
+        test1(&decode,ziplen);
+        char *Dedata=(char*)malloc(sizeof(char)*10000);
+        Decode(Dedata,huffmacode,decode);
+        OutputData(Dedata);
+    }
+    return 0;
+}
+
+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
+export DISPLAY=host.docker.internal:0
+FILE *fp=fopen("code_zip.txt","w");
+    int len=strlen(code);
+    
+    int zero_num=(32-len%32)%32;
+    int i=0;
+    for(i=0;i<zero_num;i++)
+    {
+        code[i+len]='0';
+    }
+    code[i+len]='\0';
+    len=strlen(code);
+    fprintf(fp,"%d ",zero_num);
+    i=0;
+    while(i<len)
+    {
+        int j=0;
+        unsigned int temp=0;
+        for(j=0;j<32;j++)
+        {
+            temp=temp+pow(2,j)*(code[i+j]-'0');
+        }
+        fprintf(fp,"%u ",temp);
+        i+=32;
+    }
+    fclose(fp);
+GetHufcode(huffmacode);
+Now let me introduce you to the main content of Keynesianism.
+
+Keynesianism (also known as "Keynesian economics") is an economic theory based on the ideas of John Maynard Keynes's book The General Theory of Employment, Interest and Money. It is advocated that the country adopt expansionary economic policies to promote economic growth by increasing demand. That is, expand government spending, Implement deficit finance, stimulate the economy, and sustain prosperity. Keynesian economic theory states that Macro economic trends constrain individual specific behaviors. Political economy or economics since the late 18th century has been based on the idea of increasing production to increase economic output. Keynes, on the other hand, believed that the decline in aggregate demand for goods was the main cause of the recession. From this point of view, he argues that Measures to maintain the balance of overall economic activity data can macroscopically balance supply and demand. So Keynes and other economic theories based on Keynesian theory are called macroeconomics, as distinct from microeconomics, which focuses on the study of individual behavior.
+
+The Keynesian logic of extrapolation starts with full employment:
+
+1. The previous assumption of full employment equilibrium is based on Say's law, and its premise is wrong, because the analysis results of aggregate supply and aggregate demand function show that the equilibrium is usually less than full employment.
+
+2. The reason for the existence of involuntary unemployment and the equilibrium of less than full employment lies in the lack of effective demand; Since aggregate supply does not change much in the short term, employment depends on aggregate demand;
+
+3. The reason for the lack of effective demand lies in "three basic psychological factors, namely, the psychological propensity to consume, the psychological flexibility preference, and the psychological expectation of the future return of capital".
+
+4. The absence of government intervention is to allow the lack of effective demand to continue, to allow unemployment and crisis to continue; Governments need to use fiscal rather than monetary policy to stimulate the economy and increase investment to make up for the lack of effective demand in private markets.
+
+After summarizing and integrating a large number of macro concepts from a macro perspective, Keynes made the development of economics jump out of the limit of price analysis, thus opening a new page of economics in the 20th century
+
+Now let me introduce you to the main content of Keynesianism.
+
+Keynesianism (also known as "Keynesian economics") is an economic theory based on the ideas of John Maynard Keynes's book The General Theory of Employment, Interest and Money. It is advocated that the country adopt expansionary economic policies to promote economic growth by increasing demand. That is, expand government spending, Implement deficit finance, stimulate the economy, and sustain prosperity. Keynesian economic theory states that Macro economic trends constrain individual specific behaviors. Political economy or economics since the late 18th century has been based on the idea of increasing production to increase economic output. Keynes, on the other hand, believed that the decline in aggregate demand for goods was the main cause of the recession. From this point of view, he argues that Measures to maintain the balance of overall economic activity data can macroscopically balance supply and demand. So Keynes and other economic theories based on Keynesian theory are called macroeconomics, as distinct from microeconomics, which focuses on the study of individual behavior.
+
+The Keynesian logic of extrapolation starts with full employment:
+
+1. The previous assumption of full employment equilibrium is based on Say's law, and its premise is wrong, because the analysis results of aggregate supply and aggregate demand function show that the equilibrium is usually less than full employment.
+
+2. The reason for the existence of involuntary unemployment and the equilibrium of less than full employment lies in the lack of effective demand; Since aggregate supply does not change much in the short term, employment depends on aggregate demand;
+
+3. The reason for the lack of effective demand lies in "three basic psychological factors, namely, the psychological propensity to consume, the psychological flexibility preference, and the psychological expectation of the future return of capital".
+
+4. The absence of government intervention is to allow the lack of effective demand to continue, to allow unemployment and crisis to continue; Governments need to use fiscal rather than monetary policy to stimulate the economy and increase investment to make up for the lack of effective demand in private markets.
+
+After summarizing and integrating a large number of macro concepts from a macro perspective, Keynes made the development of economics jump out of the limit of price analysis, thus opening a new page of economics in the 20th century
+GetHufcode(huffmacode);
+int ziplen=test(code);
+        char *decode;
+        test1(&decode,ziplen);
+        char *Dedata=(char*)malloc(sizeof(char)*10000);
+        Decode(Dedata,huffmacode,decode);
+        OutputData(Dedata);
+#include"Code.h"
+#include"Decode.h"
+#include"Fileop.h"
+
+#include"Code.c"
+#include"Decode.c"
+#include"Fileop.c"
+
+int main (void)
+{
+    CW *Weight;
+    int kind=0;
+    char *input;
+    GetData(&input);
+    kind=GetWeights(input,&Weight);
+    if(kind==1)
+    {
+        char **a=(char **)malloc(sizeof(char *));
+        for(int i=0;i<kind;i++)
+        {
+            a[i]=(char*)malloc(sizeof(char)*4);
+        }
+        a[0][0]=input[0];
+        a[0][1]=' ';
+        a[0][2]='1';
+        a[0][3]='\0';
+        OutputHufcode(a,kind);
+        int len=strlen(input);
+        char *code=(char *)malloc(sizeof(char)*len*10);
+        CodeString(input,a,code);
+        OutputCode(code);
+        char *Dedata=(char*)malloc(sizeof(char)*100);
+        Decode(Dedata,a,code);
+        OutputData(Dedata);
+    }
+    else
+    {
+        HuT *w=CreatNode(Weight,kind);
+        HuT *root=CreatHuffman(w,kind);
+        char **huffmacode=(char **)malloc(sizeof(char *)*kind);
+        for(int i=0;i<kind;i++)
+        {
+            huffmacode[i]=(char*)malloc(sizeof(char)*(kind));
+        }
+        char buffer[100]={0};
+        HuffmanCode(huffmacode,root,buffer,0);
+        OutputHufcode(huffmacode,kind);
+        int len=strlen(input);
+        char *code=(char *)malloc(sizeof(char)*len*strlen(huffmacode[kind-1]));
+        CodeString(input,huffmacode,code);
+        int ziplen=test(code);
+        char *decode;
+        test1(&decode,ziplen);
+        char *Dedata=(char*)malloc(sizeof(char)*10000);
+        Decode(Dedata,huffmacode,decode);
+        OutputData(Dedata);
+    }
+    return 0;
+}
+
+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
+export DISPLAY=host.docker.internal:0
+FILE *fp=fopen("code_zip.txt","w");
+    int len=strlen(code);
+    
+    int zero_num=(32-len%32)%32;
+    int i=0;
+    for(i=0;i<zero_num;i++)
+    {
+        code[i+len]='0';
+    }
+    code[i+len]='\0';
+    len=strlen(code);
+    fprintf(fp,"%d ",zero_num);
+    i=0;
+    while(i<len)
+    {
+        int j=0;
+        unsigned int temp=0;
+        for(j=0;j<32;j++)
+        {
+            temp=temp+pow(2,j)*(code[i+j]-'0');
+        }
+        fprintf(fp,"%u ",temp);
+        i+=32;
+    }
+    fclose(fp);
+GetHufcode(huffmacode);

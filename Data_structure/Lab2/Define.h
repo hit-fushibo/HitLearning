@@ -1,10 +1,10 @@
 #ifndef DEFINE_H
 #define DEFINE_H
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 typedef struct HuffmanTree
 {
@@ -12,14 +12,14 @@ typedef struct HuffmanTree
     char element;
     struct HuffmanTree *Lchild;
     struct HuffmanTree *Rchild;
-}HuT;
+} HuT;
 
 typedef struct CharWeight
 {
     char data;
     float weight;
-}CW;
+} CW;
 
-int codectn=0;
+int codectn = 0;
 
 #endif
