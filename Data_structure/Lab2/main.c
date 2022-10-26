@@ -11,13 +11,13 @@ int main(void)
     CW *Weight;
     int kind = 0;
     char *input;
-    GetData(&input);
+    GetData(&input);//get input
     if (strlen(input) == 0)
     {
         printf("error input NULL");
         return 0;
     }
-    kind = GetWeights(input, &Weight);
+    kind = GetWeights(input, &Weight);//get weight and kind
     if (kind == 1)
     {
         char **a = (char **)malloc(sizeof(char *));
@@ -43,26 +43,26 @@ int main(void)
     }
     else
     {
-        HuT *w = CreatNode(Weight, kind);
-        HuT *root = CreatHuffman(w, kind);
+        HuT *w = CreatNode(Weight, kind);//creat node
+        HuT *root = CreatHuffman(w, kind);//creat huffmantree
         char **huffmacode = (char **)malloc(sizeof(char *) * kind);
         for (int i = 0; i < kind; i++)
         {
             huffmacode[i] = (char *)malloc(sizeof(char) * (kind));
         }
         char buffer[100] = {0};
-        HuffmanCode(huffmacode, root, buffer, 0);
-        OutputHufcode(huffmacode, kind);
+        HuffmanCode(huffmacode, root, buffer, 0);//get huffmancode
+        OutputHufcode(huffmacode, kind);//output 
         int len = strlen(input);
         char *code = (char *)malloc(sizeof(char) * len * strlen(huffmacode[kind - 1]));
-        CodeString(input, huffmacode, code);
-        int ziplen = ZipCode(code);
+        CodeString(input, huffmacode, code);//code input
+        int ziplen = ZipCode(code);//oputput
         GetHufcode(huffmacode);
         char *decode;
         Unzip(&decode, ziplen);
         char *Dedata = (char *)malloc(sizeof(char) * 10000);
         Decode(Dedata, huffmacode, decode);
-        OutputData(Dedata);
+        OutputData(Dedata);//output decode
     }
     return 0;
 }
