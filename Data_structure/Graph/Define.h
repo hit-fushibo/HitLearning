@@ -8,6 +8,14 @@
 
 #define MAX_VERTES 100
 
+//树
+typedef struct Tree
+{
+    int data;
+    struct Tree* child;
+    struct Tree* brother;
+}T;
+
 //邻接矩阵
 typedef struct Adjacency_matrix
 {
@@ -37,7 +45,36 @@ typedef struct Adjacency_tables
     Vn Vertexs[MAX_VERTES];
 }At;
 
+//数字栈
+typedef struct Stack
+{
+    int top;
+    int data[MAX_VERTES];
+}S;
 
 
+
+//树栈
+typedef struct TStack
+{
+    int top;
+    T* data[MAX_VERTES];
+}TS;
+
+
+//数字队列
+typedef struct Que
+{
+    int data[MAX_VERTES];
+    int l;
+}Q;
+
+
+//树队列
+typedef struct TQue
+{
+    T* data[MAX_VERTES];
+    int l;
+}TQ;
 
 #endif
