@@ -39,6 +39,7 @@
     "stdio.h": "c",
     "information_management.h": "c",
     "btque.h": "c",
-    "string": "c"
+    "string": "c",
+    "undirected_graphs.h": "c"
   }
 }
