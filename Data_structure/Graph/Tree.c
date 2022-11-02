@@ -39,3 +39,23 @@ T* LastChild(T *root)
     return temp;
     
 }
+
+void ShowTree(T* root)
+{
+    if(root==NULL)return;
+    T* temp=root->child;
+    printf("node:%d child: ",root->data);
+    while (temp)
+    {
+        printf("%d ",temp->data);
+        temp=temp->brother;
+    }
+    printf("\n");
+    temp=root->child;
+    while (temp)
+    {
+        ShowTree(temp);
+        temp=temp->brother;
+    }
+    return ;
+}

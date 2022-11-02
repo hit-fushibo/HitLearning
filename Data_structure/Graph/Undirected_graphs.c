@@ -24,6 +24,8 @@ void Un_NewNode_Am(Am *G)
     else
     {
         printf("ERROR:no more space!(U NN M)\n");
+        getchar();
+        getchar();
         exit(8);
     }
     
@@ -35,11 +37,14 @@ void Un_DelNode_Am(Am *G,int v)
     if((*G).Vertex_num==-1)
     {
         printf("ERROR:empty graph!(U DN M)\n");
+        getchar();
+        getchar();
         exit(9);
     }
     if(!(v>=0&&v<=(*G).Vertex_num))
     {
         printf("ERROR:Invalid parameter!(U DN M)\n");
+        getchar();
         exit(8);
     }
     if(v!=(*G).Vertex_num)
@@ -74,6 +79,8 @@ void Un_SetSucc_Am(Am *G,int v1,int v2)
     else
     {
         printf("ERROR:Invalid parameter!(U SS M)\n");
+        getchar();
+        getchar();
         exit(8);
     }
 }
@@ -89,6 +96,8 @@ void Un_DelSucc_Am(Am *G,int v1,int v2)
     else
     {
         printf("ERROR:Invalid parameter!(U DS M)\n");
+        getchar();
+        getchar();
         exit(8);
     }
 }
@@ -99,11 +108,15 @@ int * Un_Succ_Am(Am *G,int v)
     if((*G).Vertex_num==-1)
     {
         printf("ERROR:empty graph!(U S M)\n");
+        getchar();
+        getchar();
         exit(9);
     }
     if(!(v>=0&&v<=(*G).Vertex_num))
     {
         printf("ERROR:Invalid parameter!(U S M)\n");
+        getchar();
+        getchar();
         exit(8);
     }
     
@@ -132,6 +145,8 @@ int Un_IsEdge_Am(Am *G ,int v1,int v2)
     else
     {
         printf("ERROR:Invalid parameter!(U IE M)\n");
+        getchar();
+        getchar();
         exit(8);
     }
 }
@@ -159,6 +174,8 @@ void Un_DelNode_At(At *G, int v)
     if(v<0||v>G->Vertex_num)
     {
         printf("ERROR:Invalid parameter!(U D T)\n");
+        getchar();
+        getchar();
         exit(8);
     }
     else
@@ -240,6 +257,8 @@ void Un_SetSucc_At(At *G, int v1, int v2)
     else
     {
         printf("ERROR:Invalid parameter!(U SS T)\n");
+        getchar();
+        getchar();
         exit(8);
     }
 }
@@ -288,12 +307,16 @@ void Un_DelSucc_At(At *G, int v1, int v2)
         else
         {
             printf("ERROR:not edge!(U SS T)\n");
+            getchar();
+            getchar();
             exit(8);
         }
     }
     else
     {
         printf("ERROR:Invalid parameter!(U SS T)\n");
+        getchar();
+        getchar();
         exit(8);
     }
 }
@@ -333,6 +356,19 @@ int Un_IsEdge_At(At *G, int v1, int v2)
     else
     {
         printf("ERROR:Invalid parameter!(U SS T)\n");
+        getchar();
+        getchar();
         exit(8);
     }
+}
+
+//访问序列转访问编号
+int* Visit_To_Num(int *visit,int len)
+{
+    int *num=(int *)malloc(sizeof(int)*len);
+    for(int i=0;i<len;i++)
+    {
+        num[visit[i]]=i;
+    }
+    return num;
 }

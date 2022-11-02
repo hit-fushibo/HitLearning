@@ -23,11 +23,11 @@ int main(void)
     At *utg=(At *)malloc(sizeof(At));
     Un_Init_At(utg);
     T *BFS_tree=(T*)malloc(sizeof(T)),*DFS_tree=(T*)malloc(sizeof(T));
-    int *visit_DFS,*visit_BFS,*degree;
+    int *visit_DFS,*visit_BFS,*degree,*DFS_num,*BFS_num;
     int vertex_num=0,edge_num=0,i=0,v1=0,v2=0,len=0;
     int ctn=0;
+    int init_flag=0;
     scanf("%d",&ctn);
-    
     while (1)
     {
         switch (ctn)
@@ -51,10 +51,16 @@ int main(void)
                     scanf("%d %d",&v1,&v2);
                     Un_SetSucc_Am(umg,v1,v2);
                 }
+                init_flag=1;
             }
             break;
         case 2:
             {
+                if(init_flag==0)
+                {
+                    printf("graph is null!\n");
+                    break;
+                }
                 int inctn=0;
                 printf("Modify\n0.exit\n1.Add vertex\n2.delete vertex\n3.Add side\n4.delete side\n:");
                 scanf("%d",&inctn);
@@ -153,6 +159,7 @@ int main(void)
                         }
                         break;
                     }
+                    if(inctn==0)break;
                     printf("Modify\n0.exit\n1.Add vertex\n2.delete vertex\n3.Add side\n4.delete side\n:");
                     scanf("%d",&inctn);
                 }
@@ -161,26 +168,45 @@ int main(void)
             break;
         case 3:
             {
+                if(init_flag==0)
+                {
+                    printf("graph is null!\n");
+                    break;
+                }
                 int inctn=0;
                 printf("\n1.recursion DFS\n2.loop DFS\n:");
                 scanf("%d",&inctn);
                 if(inctn==1)
                 {
                     visit_DFS=Un_DFS_Am_Rec(umg,&len,&DFS_tree);
-                    printf("rec dfs :\n");
+                    DFS_num=Visit_To_Num(visit_DFS,len);
+                    printf("rec dfs sequence:\n");
                     for(int i=0;i<len;i++)
                     {
                         printf("%d ",visit_DFS[i]);
+                    }
+                    printf("\n");
+                    printf("rec dfs number:\n");
+                    for(int i=0;i<len;i++)
+                    {
+                        printf("%d ",DFS_num[i]);
                     }
                     printf("\n");
                 }
                 else if(inctn==2)
                 {
                     visit_DFS=Un_DFS_Am_Cir(umg,&len,&DFS_tree);
-                    printf("cir dfs :\n");
+                    DFS_num=Visit_To_Num(visit_DFS,len);
+                    printf("cir dfs sequence:\n");
                     for(int i=0;i<len;i++)
                     {
                         printf("%d ",visit_DFS[i]);
+                    }
+                    printf("\n");
+                    printf("cir dfs number:\n");
+                    for(int i=0;i<len;i++)
+                    {
+                        printf("%d ",DFS_num[i]);
                     }
                     printf("\n");
                 }
@@ -192,32 +218,56 @@ int main(void)
             break;
         case 4:
             {
+                if(init_flag==0)
+                {
+                    printf("graph is null!\n");
+                    break;
+                }
                 visit_BFS=Un_BFS_Am(umg,&len,&BFS_tree);
-                printf("bfs umg:\n");
+                BFS_num=Visit_To_Num(visit_BFS,len);
+                printf("bfs sequence:\n");
                 for(int i=0;i<len;i++)
                 {
                     printf("%d ",visit_BFS[i]);
+                }
+                printf("\n");
+                printf("bfs number:\n");
+                for(int i=0;i<len;i++)
+                {
+                    printf("%d ",BFS_num[i]);
                 }
                 printf("\n");
             }
             break;
         case 5:
             {
+                if(init_flag==0)
+                {
+                    printf("graph is null!\n");
+                    break;
+                }
                 int inctn=0;
                 printf("\n1.DFS\n2.BFS\n:");
                 scanf("%d",&inctn);
                 if(inctn==1)
                 {
                     Un_DFS_Am_Rec(umg,&len,&DFS_tree);
+                    ShowTree(DFS_tree);
                 }
                 else if(inctn==2)
                 {
                     Un_BFS_Am(umg,&len,&BFS_tree);
+                    ShowTree(BFS_tree);
                 }
             }
             break;
         case 6:
             {
+                if(init_flag==0)
+                {
+                    printf("graph is null!\n");
+                    break;
+                }
                 Am_to_At(umg,utg);
                 degree=Un_GetDegree_At(utg,&len);
                 for(int i=0;i<len;i++)

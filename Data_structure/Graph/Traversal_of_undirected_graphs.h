@@ -17,5 +17,6 @@ int* Un_GetDegree_At(At *G,int *len);//获取每个顶点的度
 
 void Am_to_At(Am* G1,At *G2);//邻接矩阵转邻接表
 void At_to_Am(At *G1,Am*G2);//邻接表转邻接矩阵
+int* Visit_To_Num(int *visit,int len);//访问序列转访问编号
 
 #endif
