@@ -14,7 +14,7 @@ int** Dijkstra(Am* G,int source)
     for(i=0;i<=G->Vertex_num;i++)
     {
         result[0][i]=G->Matrix[source][i];
-        result[1][i]=0;
+        result[1][i]=source;
     }
     for(i=0;i<G->Vertex_num;i++)
     {
@@ -85,6 +85,7 @@ int*** Floyd(Am* G)
         {
             for(int k=0;k<=G->Vertex_num;k++)
             {
+                if(i==j)break;;
                 if(result[0][i][k]+result[0][k][j]<result[0][i][j])
                 {
                     result[0][i][j]=result[0][i][k]+result[0][k][j];

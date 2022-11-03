@@ -55,8 +55,19 @@ int main(void)
                 }
                 else
                 {
+                    int source=0;
                     printf("source node\n");
-                    scanf("%d",&source);
+                    getin=scanf("%d",&source);
+                    if(source<0||source>G->Vertex_num)
+                    getin=-1;
+                    while (getin!=1)
+                    {
+                        fflush(stdin);
+                        printf("please enter a legal number!\n");
+                        getin=scanf("%d",&source);
+                        if(source<0||source>G->Vertex_num)
+                        getin=-1;
+                    }
                     dijkstra_result=Dijkstra(G,source);
                     for(int i=0;i<=G->Vertex_num;i++)
                     {
@@ -141,7 +152,17 @@ int main(void)
                 {
                     int c=0;
                     printf("please enter c\n:");
-                    scanf("%d",&c);
+                    getin=scanf("%d",&c);
+                    if(c<0||c>G->Vertex_num)
+                    getin=-1;
+                    while (getin!=1)
+                    {
+                        fflush(stdin);
+                        printf("please enter a legal number!\n");
+                        getin=scanf("%d",&c);
+                        if(c<0||c>G->Vertex_num)
+                        getin=-1;
+                    }
                     floyd_result=Floyd(G);
                     for(int i=0;i<=G->Vertex_num;i++)
                     {
@@ -187,7 +208,18 @@ int main(void)
                 {
                     int u=0,v=0;
                     printf("please enter u v\n:");
-                    scanf("%d %d",&u,&v);
+                    getin=scanf("%d %d",&u,&v);
+                    if((u<0||u>G->Vertex_num)||v<0||v>G->Vertex_num)
+                    getin=-1;
+                    while (getin!=2)
+                    {
+                        fflush(stdin);
+                        printf("please enter legal number!\n");
+                        getin=scanf("%d %d",&u,&v);
+                        if((u<0||u>G->Vertex_num)||v<0||v>G->Vertex_num)
+                        getin=-1;
+                    }
+                    
                     floyd_result=Floyd(G);
                     for(int i=0;i<=G->Vertex_num;i++)
                     {
