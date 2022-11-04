@@ -270,7 +270,7 @@ int main(void)
                 degree=Un_GetDegree_At(utg,&len);
                 for(int i=0;i<len;i++)
                 {
-                    printf("%d ",degree[i]);
+                    printf("node :%d degree:%d\n",i,degree[i]);
                 }
                 printf("\n");
             }
