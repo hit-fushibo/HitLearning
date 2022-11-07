@@ -108,6 +108,7 @@ int GetNext(T* root)
 //查找
 int Search(T* root,int element)
 {
+    global_count++;
     int flag=0;
     if(root==NULL)
     {
@@ -154,35 +155,159 @@ void Inorder(T* root,int *order)
 //1-num的有序数组
 int* SortedInt(int num)
 {
-    int *result=(int *)malloc(sizeof(int)*num);
+    int *result=(int *)malloc(sizeof(int)*(num+1));
     for(int i=1;i<=num;i++)
     {
-        result[i-1]=i;
+        result[i]=i;
     }
+    result[0]=num;
     return result;
 }
 
 //1-num的随机不重复数组
 int* RandomInt(int num)
 {
-    int *result=(int *)malloc(sizeof(int)*num);
-    int *temp=(int *)malloc(sizeof(int)*num);
-    int *B=(int *)malloc(sizeof(int)*num);
+    int *result=(int *)malloc(sizeof(int)*(num+1));
+    int *temp=(int *)malloc(sizeof(int)*(num+1));
+    int *B=(int *)malloc(sizeof(int)*(num+1));
     for(int i=1;i<=num;i++)
     {
-        temp[i-1]=i;
-        B[i-1]=0;
+        temp[i]=i;
+        B[i]=0;
     }
-    for(int i=0;i<num;i++)
+    for(int i=1;i<=num;i++)
     {
-        int temp1=rand()%num;
+        int temp1=rand()%num+1;
         while(B[temp1])
         {
-            temp1=rand()%num;
+            
+            temp1=rand()%num+1;
         }
         result[i]=temp[temp1];
         B[temp1]=1;
     }
+    result[0]=num;
     free(temp);free(B);
     return result;
+}
+
+//二分查找
+int BinSearch(int *num,int element)
+{
+    int i=1,j=num[0];
+    int temp=(i+j)/2;
+    int flag=0;
+    while (i<=j)
+    {
+        if(element==num[temp])
+        {
+            flag++;
+            break;
+        }
+        else if(element<num[temp])
+        {
+            j=temp-1;
+        }
+        else
+        {
+            i=temp+1;
+        }
+        flag++;
+        temp=(i+j)/2;
+    }
+    return flag;
+}
+
+
+int TestSorted()
+{
+    int *sorted,*random;
+    int length=1024;
+    sorted=SortedInt(length);
+    random=RandomInt(length);
+    T* root=(T*)malloc(sizeof(T));
+    root->lchild=NULL;
+    root->rchild=NULL;
+    int success=0,unsuccess=0;
+    for(int i=0;i<1000;i++)
+    {
+        int element=rand()%1024+1;
+        success+=BinSearch(sorted,element);
+        while (element>=1&&element<=1024)
+        {
+            element=rand();
+        }
+        unsuccess+=BinSearch(sorted,element);
+    }
+    printf("bin search:success :%f,unsuccess :%f\n",(float)success/1000,(float)unsuccess/1000);
+    for(int j=1;j<=1024;j++)
+    {
+        if(j==1)
+        {
+            root->data=sorted[j];
+        }
+        else
+        {
+            CreatBst(root,sorted[j]);
+        }
+    }
+    success=0;unsuccess=0;
+    for(int i=0;i<1000;i++)
+    {
+        int element=rand()%1024+1;
+        global_count=0;
+        Search(root,element);
+        success+=global_count;
+        global_count=0;
+        while (element>=1&&element<=1024)
+        {
+            element=rand();
+        }
+        Search(root,element);
+        unsuccess+=global_count;
+    }
+    printf("bst sorted success :%f,unsuccess :%f\n",(float)success/1000,(float)unsuccess/1000);
+    for(int j=1;j<=1024;j++)
+    {
+        if(j==1)
+        {
+            root->data=random[j];
+        }
+        else
+        {
+            CreatBst(root,random[j]);
+        }
+    }
+    success=0;unsuccess=0;
+    for(int i=0;i<1000;i++)
+    {
+        root->lchild=NULL;
+        root->rchild=NULL;
+        random=RandomInt(length);
+        for(int j=1;j<=1024;j++)
+        {
+            if(j==1)
+            {
+                root->data=random[j];
+            }
+            else
+            {
+                CreatBst(root,random[j]);
+            }
+        }
+        
+        int element=rand()%1024+1;
+        global_count=0;
+        Search(root,element);
+        success+=global_count;
+        global_count=0;
+        while (element>=1&&element<=1024)
+        {
+            element=rand();
+        }
+        Search(root,element);
+        unsuccess+=global_count;
+    }
+    printf("bst random success :%f,unsuccess :%f\n",(float)success/1000,(float)unsuccess/1000);
+
 }

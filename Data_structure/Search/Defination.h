@@ -5,6 +5,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
+#include<time.h>
+#include<windows.h>
 
 #define UNDIFINE __INT32_MAX__
 int global_count;

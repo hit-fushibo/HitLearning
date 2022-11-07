@@ -12,7 +12,13 @@ int Search(T* root,int element);//查找
 int* Sort(T* root,int num);//排序
 void Inorder(T* root,int *order);
 
+int BinSearch(int *num,int element);//二分查找
+
+
 int* SortedInt(int num);//1-num的有序数组
 int* RandomInt(int num);//1-num的随机不重复数组
+
+int TestSorted();
+
 
 #endif
