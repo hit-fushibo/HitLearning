@@ -7,6 +7,7 @@
 #include<math.h>
 
 #define UNDIFINE __INT32_MAX__
+int global_count;
 
 typedef struct tree
 {

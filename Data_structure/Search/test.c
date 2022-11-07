@@ -32,10 +32,10 @@ int main (void)
     {
         printf("%d ",sort[i]);
     }*/
-    int *randmu=RandomInt(node_num);
+    int *random=RandomInt(node_num);
     for(int i=0;i<node_num;i++)
     {
-        printf("%d ",randmu[i]);
+        printf("%d ",random[i]);
     }
 
     return 0;
