@@ -38,6 +38,7 @@ int main (void)
                     else
                     CreatBst(root,temp);
                 }
+                printf("%d\n",root->data);
             }
             break;
         case 2:
@@ -45,7 +46,9 @@ int main (void)
                 printf("please enter the number you want to delete\n:");
                 int del=0;
                 scanf("%d",&del);
+                printf("%d\n",del);
                 Delete(root,del);
+                printf("2\n");
             }
             break;
         case 3:

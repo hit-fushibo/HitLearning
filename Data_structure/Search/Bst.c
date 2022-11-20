@@ -88,9 +88,18 @@ int GetNext(T* root)
 {
     T* temp=root->lchild;
     int i;
-    if (temp->rchild->rchild==NULL)
+    if(temp->rchild==NULL)
+    {
+        i=temp->data;
+        root->lchild=temp->lchild;
+        free(temp);
+        return i;
+    }
+    else if (temp->rchild->rchild==NULL)
     {
         i=temp->rchild->data;
+        free(temp->rchild);
+        return i;
     }
     else
     {
@@ -98,11 +107,11 @@ int GetNext(T* root)
         {
             temp=temp->rchild;
         }
+        i=temp->rchild->data;
+        temp->rchild=temp->rchild->lchild;
+        free(temp->rchild);
+        return i;
     }
-    i=temp->rchild->data;
-    free(temp->rchild);
-    temp->rchild=NULL;
-    return i;
 }
 
 //查找
