@@ -1,38 +1,38 @@
 #include<stdio.h>
 #include<math.h>
-#include<stdlib.h>
+int sum(int a,int b,int c,int d)
+{
+    return a*c-b*d;
+}
+
+float P(int a,int b,int c,int d)
+{
+    float t=a+b+c+d;
+    float x=pow(0.4,t);
+    float y=pow(0.6,(4-t));
+    float r=x*y;
+    return r;
+}
 
 int main(void)
 {
-	long int n,N,sum=0,i=1,r,j,k,l;
-    long long error=0;
-	long int * a;
-	scanf("%ld %ld",&n,&N);
-    r=N/(n+1);
-	a=(long int *)malloc(sizeof(long int)*(n+1));
-	a[0]=0;
-	for(i=1;i<n+1;i++)
-	{
-		scanf("%ld",&a[i]);
-	}
-	long int f[N];long int g[N];
-    for(i=0;i<n;i++)
+    int a,b,c,d;
+    float x[3]={0};
+    for(a=0;a<2;a++)
     {
-        j=a[i],k=a[i+1];
-        for(l=j;l<k;l++)
+        for(b=0;b<2;b++)
         {
-            f[l]=i;
+            for(c=0;c<2;c++)
+            {
+                for(d=0;d<2;d++)
+                {
+                    x[sum(a,b,c,d)+1]+=P(a,b,c,d);
+                }
+            }
         }
     }
-    for(j=a[n];j<N;j++)
+    for(int i=0;i<3;i++)
     {
-        f[j]=n;
+        printf("%d %f\n",i-1,x[i]);
     }
-    for(i=0;i<N;i++)
-    {
-        g[i]=i/r;
-        error+=abs(g[i]-f[i]);
-    }
-    printf("%ld",error);
-	return 0;
 }
