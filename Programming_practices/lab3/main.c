@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Windows
-    size = 10000000;
+    size = 100000;
 #endif
 
     //生成随机数组
