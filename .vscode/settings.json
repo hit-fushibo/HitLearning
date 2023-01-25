@@ -41,5 +41,8 @@
     "btque.h": "c",
     "string": "c",
     "undirected_graphs.h": "c"
-  }
+  },
+  "cSpell.words": [
+    "shudu"
+  ]
 }
