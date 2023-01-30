@@ -95,6 +95,8 @@ void Handle(int **map)//开始解数独
                 }
             }
         }
+        //ShowMap(map);
+        //printf("\n\n");
         if(Flag==0)
         {
             printf("error no result\n");
