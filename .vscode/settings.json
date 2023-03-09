@@ -44,5 +44,6 @@
   },
   "cSpell.words": [
     "shudu"
-  ]
+  ],
+  "C_Cpp_Runner.useAddressSanitizer": false
 }
