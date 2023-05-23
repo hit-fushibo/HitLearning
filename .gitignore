@@ -1,4 +1,6 @@
 *.exe
+*.pdf
+*.zip
 /env
 .vscode/
 /markdown
@@ -6,3 +8,5 @@
 .vscode/launch.json
 web-learn/
 IntrodectionToAlgorithms/essay
+go/bin
+go/pkg
