@@ -1,6 +1,7 @@
 *.exe
 *.pdf
 *.zip
+*.gtpl
 /env
 .vscode/
 /markdown
