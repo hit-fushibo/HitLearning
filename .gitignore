@@ -1,0 +1,14 @@
+*.exe
+*.pdf
+*.zip
+*.gtpl
+/env
+.vscode/
+/markdown
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+web-learn/
+IntrodectionToAlgorithms/essay
+go/bin
+go/pkg
+go/src/github.com
