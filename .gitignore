@@ -5,16 +5,7 @@
 *.jpg
 *.png
 *.pyc
-/env
 .vscode/
-/markdown
-.vscode/c_cpp_properties.json
-.vscode/launch.json
-web-learn/
-IntrodectionToAlgorithms/essay
 go/bin
 go/pkg
 go/src/github.com
-IntroductionToArtificialIntelligence/lab2/lenet/ckpt
-IntroductionToArtificialIntelligence/lab2/lenet/MNIST_Data
-Learning/ProcessorDesignAndPractice
