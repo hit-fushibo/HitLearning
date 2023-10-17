@@ -29,10 +29,19 @@ func login(w http.ResponseWriter, r *http.Request) {
 		log.Println(t.Execute(w, nil))
 	} else {
 		//请求的是登录数据，那么执行登录的逻辑判断
-		r.ParseForm()
+		accountID := r.FormValue("username") //获取账号
+		password := r.FormValue("password")  //获取密码
+		if accountID == "小识" && password == "123" {
+			//跳转到主页
+			t, _ := template.ParseFiles("sucess.gtpl")
+			t.Execute(w, nil)
+		} else {
+			//跳转到登录
+			w.Write([]byte("<script>alert('账号或者密码不正确')</script>"))
+			t, _ := template.ParseFiles("login.gtpl")
+			t.Execute(w, nil)
+		}
 
-		fmt.Println("username:", r.Form["username"])
-		fmt.Println("password:", r.Form["password"])
 	}
 }
 
@@ -45,10 +54,29 @@ func mayuan(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func fish(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Println("method:", r.Method)
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("fish.gtpl")
+		log.Println(t.Execute(w, nil))
+	}
+}
+
+func mp4(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == "GET" {
+		http.ServeFile(w, r, "fish.mp4")
+	}
+}
+
 func main() {
 	http.HandleFunc("/", sayhelloName) //设置访问的路由
 	http.HandleFunc("/login", login)   //设置访问的路由
 	http.HandleFunc("/mayuan", mayuan)
+	http.HandleFunc("/fish", fish)
+	http.HandleFunc("/fish.mp4", mp4)
+
 	err := http.ListenAndServe(":9090", nil) //设置监听的端口
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
