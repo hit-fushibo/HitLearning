@@ -5,6 +5,10 @@
 *.jpg
 *.png
 *.pyc
+*.aux
+*.log
+*.gz
+*.out
 .vscode/
 go/bin
 go/pkg
