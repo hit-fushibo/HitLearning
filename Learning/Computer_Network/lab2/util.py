@@ -2,12 +2,12 @@ import socket
 import random
 import select
 
-WINDOW_SIZE=8
+WINDOW_SIZE=4
 SEQ_LENGTH=10
 
 MAX_TIME=3
 
-PACKET_LOSS_P=-1#不丢包
+PACKET_LOSS_P=0.2#不丢包
 
 class SendData():
     def __init__(self,data) -> None:
@@ -248,3 +248,106 @@ def GBN_recv_file(s,save_path):
     with open(save_path,'w') as f:
         f.write(filedata)
         f.close()
+        
+        
+def SR_send(s,data_to_send,addr):
+    times=[]
+    seq=0
+    data_windows=[]
+    while True:
+        for i in range(len(times)):
+            if times[i]>MAX_TIME:
+                print('seq:',data_windows[i].seq,'time out. resend')
+                data_windows[i].state=0
+        while len(data_windows)<WINDOW_SIZE:
+            d=data_to_send.next()
+            if not d:
+                break
+            data=Data(d,seq=seq)
+            times.append(0)
+            data_windows.append(data)
+            seq+=1
+        if not data_windows:
+            break
+        for data in data_windows:
+            if not data.state:
+                print('send:'+data.get_data())
+                s.sendto(data.get_data().encode(),addr)
+                data.state=1
+        readable, writeable, errors = select.select([s, ], [], [], 1)
+        if len(readable)>0:
+            message,address=s.recvfrom(1024)
+            ack=message.decode().split(' ')[1]
+            for i in range(len(data_windows)):
+                if int(ack)==data_windows[i].seq:
+                    times[i]=-1
+                    if i==0:
+                        print('ACK:',ack,'recv move')
+                        data_windows=data_windows[i+1:]
+                        times=times[i+1:]
+                        while times[0]==-1:
+                            print('seq:',data_windows[0].seq,' is already ack. move')
+                            data_windows=data_windows[1:]
+                            times=times[1:]
+                            if not data_windows:
+                                break
+                    else:
+                        print('ACK:',ack,'recv but not move')
+                    break
+        else:
+            for i in range(len(times)):
+                if times[i]!=-1:
+                    times[i]+=1
+    s.sendto('end'.encode(),addr)
+    
+def SR_recv(s):
+    start_seq=0
+    data_windows=[]
+    data_cache=[]
+    while True:
+        readable, writeable, errors = select.select([s, ], [], [], 1)
+        if len(readable)>0:
+            message,addr=s.recvfrom(1024)
+            if message.decode()=='end':
+                break
+            seq=int(message.decode().split(' ')[0])
+            data=message.decode().split(' ')[1]
+            if seq==start_seq:
+                if random.random()<PACKET_LOSS_P:
+                    continue
+                retmsg='ACK '+str(seq)
+                s.sendto(retmsg.encode(),addr)
+                start_seq=(seq+1)%SEQ_LENGTH
+                if seq not in data_windows:
+                    data_windows.append(seq)
+                    print('recv data:',message.decode().split(' ')[1],' seq=',seq,'accept')
+                while len(data_windows)>WINDOW_SIZE:
+                    data_windows.pop(0)
+                if data_cache:
+                    while start_seq==data_cache[0][0]:
+                        start_seq+=1
+                        start_seq%=SEQ_LENGTH
+                        seq=data_cache[0][0]
+                        data=data_cache[0][1]
+                        if seq not in data_windows:
+                            data_windows.append(seq)
+                            print('recv data from cache:',data,' seq=',seq,'accept')
+                        while len(data_windows)>WINDOW_SIZE:
+                            data_windows.pop(0)
+                        
+                        
+                        data_cache=data_cache[1:]
+                        if not data_cache:
+                            break
+                    
+                #处理缓存
+            else:
+                for i in range(WINDOW_SIZE):
+                    if seq == (i+start_seq)%SEQ_LENGTH:
+                        print('recv data:',message.decode().split(' ')[1],' seq=',seq,'not accept but cached')
+                        data_cache.append([seq,data])
+                        retmsg='ACK '+str(seq)
+                        s.sendto(retmsg.encode(),addr)
+                        break
+                
+    pass
