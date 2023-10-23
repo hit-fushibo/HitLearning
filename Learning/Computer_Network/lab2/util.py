@@ -285,12 +285,13 @@ def SR_send(s,data_to_send,addr):
                         print('ACK:',ack,'recv move')
                         data_windows=data_windows[i+1:]
                         times=times[i+1:]
-                        while times[0]==-1:
-                            print('seq:',data_windows[0].seq,' is already ack. move')
-                            data_windows=data_windows[1:]
-                            times=times[1:]
-                            if not data_windows:
-                                break
+                        if times:
+                            while times[0]==-1:
+                                print('seq:',data_windows[0].seq,' is already ack. move')
+                                data_windows=data_windows[1:]
+                                times=times[1:]
+                                if not data_windows or not times:
+                                    break
                     else:
                         print('ACK:',ack,'recv but not move')
                     break
