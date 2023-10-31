@@ -41,7 +41,7 @@ def T(X,cases):
     T=7
     rho=0.5 #0.1-0.9
     beta=5 #0.5-10
-    theta=0.9 #0.1-0.9
+    theta=0.5 #0.1-0.9
     gamma_q=0.5 #0.1-0.9
     d_q=1-gamma_q
     
@@ -65,7 +65,7 @@ def rho(X,cases):
     T=7
     rho=0.5 #0.1-0.9
     beta=5 #0.5-10
-    theta=0.9 #0.1-0.9
+    theta=0.5 #0.1-0.9
     gamma_q=0.5 #0.1-0.9
     d_q=1-gamma_q
     
@@ -92,7 +92,7 @@ def beta(X,cases):
     T=7
     rho=0.5 #0.1-0.9
     beta=5 #0.5-10
-    theta=0.9 #0.1-0.9
+    theta=0.5 #0.1-0.9
     gamma_q=0.5 #0.1-0.9
     d_q=1-gamma_q
     
@@ -118,7 +118,7 @@ def theta(X,cases):
     T=7
     rho=0.5 #0.1-0.9
     beta=5 #0.5-10
-    theta=0.9 #0.1-0.9
+    theta=0.5 #0.1-0.9
     gamma_q=0.5 #0.1-0.9
     d_q=1-gamma_q
     
@@ -144,7 +144,7 @@ def gamma_q(X,cases):
     T=7
     rho=0.5 #0.1-0.9
     beta=5 #0.5-10
-    theta=0.9 #0.1-0.9
+    theta=0.5 #0.1-0.9
     gamma_q=0.5 #0.1-0.9
     d_q=1-gamma_q
     
