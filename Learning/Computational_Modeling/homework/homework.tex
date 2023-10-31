@@ -1,9 +1,9 @@
 \documentclass[12pt, a4paper, oneside]{ctexart}
-\usepackage{listings,amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs,minipage-marginpar}
+\usepackage{subcaption,listings,amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs,minipage-marginpar}
 
 \title{\textbf{计算建模课程作业}}
-\author{符世博}
-\date{\today}
+\author{2021113140符世博}
+
 \linespread{1.5}
 \definecolor{shadecolor}{RGB}{241, 241, 255}
 \newcounter{problemname}
@@ -301,17 +301,17 @@ $$
         \begin{minipage}[c]{0.3\textwidth}
             \centering
             \includegraphics[width=0.95\textwidth]{img/a.png}
-            \caption{$P_A$状态转移图}
+            \subcaption{$P_A$状态转移图}
         \end{minipage}
         \begin{minipage}[c]{0.3\textwidth}
             \centering
             \includegraphics[width=0.95\textwidth]{img/b.png}
-            \caption{$P_B$状态转移图}
+            \subcaption{$P_B$状态转移图}
         \end{minipage}
         \begin{minipage}[c]{0.3\textwidth}
             \centering
             \includegraphics[width=0.95\textwidth]{img/c.png}
-            \caption{$P_C$状态转移图}
+            \subcaption{$P_C$状态转移图}
         \end{minipage}
     \end{figure}
 \end{solution}
@@ -332,6 +332,20 @@ $$
     \end{enumerate}
 \end{problem}
 \begin{solution}
+由$|\lambda E-P|=0$可得
+
+$$
+\lambda^3-3a\lambda^2-(3a^2-3bc)\lambda-a^3-b^3-c^3-3abc=0
+$$
+根据此式即可得出矩阵的不同特征值
+
+
+其判别式为$\Delta=-108a^3(a^3+3abc+b^3+c^3)+81a^2(a^3-bc)^2-162a(a^3-bc)(a^3+3abc+b^3+c^3)+180(a^3-bc)^3-27(a^3+3abc+b^3+c^3)^2$
+。可知如果$b\neq c$，$\Delta<0$所以特征值有复数。
+
+当$a=\frac{1}{2},b=\frac{1}{4},c=\frac{1}{4}$时，矩阵P的特征值为：$1$、$\frac{1}{4}$、$\frac{1}{4}$。对应的特征向量为：$[1,1,1]$、$[-1,1,0]$、$[-1,0,1]$
+
+当$a=\frac{1}{2},b=\frac{1}{8},c=\frac{3}{8}$时，矩阵P的特征值为：$1$、$\frac{1}{4}-\sqrt{3}\frac{i}{8}$、$\frac{1}{4}+\sqrt{3}\frac{i}{8}$。对应的特征向量为：$[1,1,1]$、$[-\frac{1}{2}+\sqrt{3}\frac{i}{2},-\frac{1}{2}-\sqrt{3}\frac{i}{2},1]$、$[-\frac{1}{2}-\sqrt{3}\frac{i}{2},-\frac{1}{2}+\sqrt{3}\frac{i}{2},1]$
 
 \end{solution}
 
