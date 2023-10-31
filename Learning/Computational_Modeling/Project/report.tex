@@ -1,5 +1,5 @@
 \documentclass[withoutpreface,bwprint]{cumcmthesis}
-
+% \usepackage{subfigure}
 \title{基于SEIR改进模型的疫情应对措施分析}
 
 \begin{document}
@@ -20,7 +20,7 @@
 性，将人群划分为多个子群体，各子群体之间因人员流动而藕合，形成复杂动态系统；第三种
 是微观个体方法：建模出发点是人群中的个体，个体有各自的属性和行为规则，个体之间形成接触网络，感染
 者和易感者的接触导致易感个体状态的变化，形成网络上的传播动力学过程。三种建模方法的基本思想如\cref{fig:1}。
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \begin{minipage}[c]{0.3\textwidth}
         \centering
@@ -46,7 +46,7 @@
 
 \par
 在这里，选择单一群体方法中的SEIR模型作为基础模型，如\cref{fig:2}，在基于SEIR模型的改进模型上进行分析。
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{SEIR_model}
     \caption{SEIR模型}
@@ -63,7 +63,7 @@
 普通潜伏期人群$E$、被隔离的潜伏期人群$E_q$、未被收治的感染人群$I$和被隔离收治的感染人群$I_q$。同时考虑疾病导致的死亡，增加因病死亡人群$D$。
 新的模型拓扑结构如\cref{fig:3}。
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{SEIRQD_model}
     \caption{改进模型的拓扑结构}
@@ -75,7 +75,7 @@
 在传统的SEIR模型中，各个人群之间的转移参数各自独立，无法挖掘出各个参数之间的关系以及各个参数的实际指导意义。
 因此，考虑到改进模型的人群划分，将参数重新设置，增强其关联性和实际意义。新设置的参数如\cref{fig:4}。
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{SEIRQD}
     \caption{改进模型的参数设置}
@@ -83,28 +83,28 @@
 \end{figure}
 \par
 各个参数含义如\cref{tb:1}。
-\begin{table}[!h]
+\begin{table}[H]
     \caption{参数含义}\label{tb:1}
     \resizebox{\textwidth}{!}{
         \begin{tabular}{cc}
             \toprule[1.5pt]
-            名称         & 含义\\
+            名称         & 含义                                       \\
             \midrule[1pt]
-            $\rho$     &  易感人群被追踪到的概率，可以视为对普通群众的隔离强度  \\
-            $\omega$   &  被隔离的易感人群接触隔离的速度，即隔离时长的倒数  \\
-            $\beta$    &  一天中易感人群和潜伏期人群或感染人群的有效接触次数，可视为普通群众的防范意识强弱  \\
-            $\varphi$  &  传染病传染强度  \\
-            $\epsilon$ &  潜伏期人群相较于染病人群的感染能力大小  \\
-            $\alpha$   &  潜伏期人群转变为染病人群的速度，即潜伏期的倒数  \\
-            $\theta$   &  收治感染人群的速度，可视为医疗资源的倾斜程度  \\
-            $\gamma_I$ &  未被收治的感染人群康复速度，可视为人体自愈能力大小  \\
-            $\gamma_q$ &  被收治的感染人群康复速度，可视为药物研发重视程度  \\
-            $d$        &  未被收治的感染人群死亡速度，为1-$\gamma_I$ \\
-            $d_q$      &  被收治的感染人群死亡速度，为1-$\gamma_q$  \\
+            $\rho$     & 易感人群被追踪到的概率，可以视为对普通群众的隔离强度               \\
+            $\omega$   & 被隔离的易感人群接触隔离的速度，即隔离时长的倒数                 \\
+            $\beta$    & 一天中易感人群和潜伏期人群或感染人群的有效接触次数，可视为普通群众的防范意识强弱 \\
+            $\varphi$  & 传染病传染强度                                  \\
+            $\epsilon$ & 潜伏期人群相较于染病人群的感染能力大小                      \\
+            $\alpha$   & 潜伏期人群转变为染病人群的速度，即潜伏期的倒数                  \\
+            $\theta$   & 收治感染人群的速度，可视为医疗资源的倾斜程度                   \\
+            $\gamma_I$ & 未被收治的感染人群康复速度，可视为人体自愈能力大小                \\
+            $\gamma_q$ & 被收治的感染人群康复速度，可视为药物研发重视程度                 \\
+            $d$        & 未被收治的感染人群死亡速度，为1-$\gamma_I$              \\
+            $d_q$      & 被收治的感染人群死亡速度，为1-$\gamma_q$               \\
             \bottomrule[1.5pt]
         \end{tabular}
     }
-    
+
 \end{table}
 
 
@@ -115,12 +115,12 @@
 \begin{equation}
     \begin{cases}
         \frac{dS}{dt}=-(1-\rho)\varphi\beta(I+\epsilon E)S-\rho\varphi\beta(I+\epsilon E)S-\rho(1-\varphi)\beta(I+\epsilon E)S+\omega S_q \\
-        \frac{dE}{dt}=(1-\rho)\varphi\beta(I+\epsilon E)S-\alpha E \\
-        \frac{dI}{dt}=\alpha E-\gamma_II-d_II-\theta I\\
-        \frac{dR}{dt}=\gamma_II+\gamma_qI_q\\
-        \frac{dS_q}{dt}=\rho(1-\varphi)\beta(I+\epsilon E)S-\omega S_q\\
-        \frac{dE_q}{dt}=\rho\varphi\beta(I+\epsilon E)S-\alpha E_q \\
-        \frac{dI_q}{dt}=\alpha E_q-\gamma_qI_q-d_qI_q+\theta I \\
+        \frac{dE}{dt}=(1-\rho)\varphi\beta(I+\epsilon E)S-\alpha E                                                                        \\
+        \frac{dI}{dt}=\alpha E-\gamma_II-d_II-\theta I                                                                                    \\
+        \frac{dR}{dt}=\gamma_II+\gamma_qI_q                                                                                               \\
+        \frac{dS_q}{dt}=\rho(1-\varphi)\beta(I+\epsilon E)S-\omega S_q                                                                    \\
+        \frac{dE_q}{dt}=\rho\varphi\beta(I+\epsilon E)S-\alpha E_q                                                                        \\
+        \frac{dI_q}{dt}=\alpha E_q-\gamma_qI_q-d_qI_q+\theta I                                                                            \\
         \frac{dD}{dt}=dI+d_qI_q
     \end{cases}
     \label{eq:1}
@@ -131,7 +131,7 @@
 在流行前期，中期，后期上述参数对于传染病继续流行50天后的死亡率的影响。
 不同情况下模型初始参数设置如\cref{fig:5}。
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{args_in_cases}
     \caption{不同情况下模型参数设置}
@@ -140,8 +140,350 @@
 
 
 \section{结果分析}
+在这里，分别对上一节中设置的9种不同情况分别进行分析，其中参数$\omega$这里用隔离天数$T$代替。待研究参数默认值以及其对应浮动范围如\cref{tb:2}
+\begin{table}[H]
+    \caption{参数含义}\label{tb:2}
+    \centering
+    \begin{tabular}{ccc}
+        \toprule[1.5pt]
+        参数         & 默认值 & 取值范围      \\
+        \midrule[1pt]
+        $\rho$     & $0.5$ & $0.1-0.9$   \\
+        $T$        & $7$   & $1-14$（取整数） \\
+        $\beta$    & $5$   & $0.5-10$    \\
+        $\theta$   & $0.5$ & $0.1-0.9$   \\
+        $\gamma_q$ & $0.5$ & $0.1-0.9$   \\
+        \bottomrule[1.5pt]
+    \end{tabular}
+\end{table}
+
+\subsection{高烈度前期}
+
+对于高烈度传染病传播前期各参数对继续流行50天后的死亡率影响如\cref{fig:6}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/1/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/1/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/1/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/1/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/1/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{高烈度前期各参数对死亡率影响}
+    \label{fig:6}
+    
+\end{figure}
+
+\subsection{高烈度中期}
+
+对于高烈度传染病传播中期各参数对继续流行50天后的死亡率影响如\cref{fig:7}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/2/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/2/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/2/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/2/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/2/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{高烈度中期各参数对死亡率影响}
+    \label{fig:7}
+    
+\end{figure}
+
+\subsection{高烈度后期}
+对于高烈度传染病传播前期各参数对继续流行50天后的死亡率影响如\cref{fig:8}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/3/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/3/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/3/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/3/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/3/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{高烈度后期各参数对死亡率影响}
+    \label{fig:8}
+    
+\end{figure}
+
+\subsection{中烈度前期}
+
+对于中烈度传染病传播前期各参数对继续流行50天后的死亡率影响如\cref{fig:9}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/4/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/4/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/4/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/4/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/4/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{中烈度前期各参数对死亡率影响}
+    \label{fig:9}
+    
+\end{figure}
+
+\subsection{中烈度中期}
+
+对于中烈度传染病传播中期各参数对继续流行50天后的死亡率影响如\cref{fig:10}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/5/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/5/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/5/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/5/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/5/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{中烈度中期各参数对死亡率影响}
+    \label{fig:10}
+    
+\end{figure}
+
+\subsection{中烈度后期}
+
+对于中烈度传染病传播后期各参数对继续流行50天后的死亡率影响如\cref{fig:11}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/6/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/6/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/6/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/6/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/6/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{中烈度后期各参数对死亡率影响}
+    \label{fig:11}
+    
+\end{figure}
+
+\subsection{低烈度前期}
+
+对于低烈度传染病传播前期各参数对继续流行50天后的死亡率影响如\cref{fig:12}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/7/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/7/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/7/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/7/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/7/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{低烈度前期各参数对死亡率影响}
+    \label{fig:12}
+    
+\end{figure}
+
+\subsection{低烈度中期}
+
+对于低烈度传染病传播中期各参数对继续流行50天后的死亡率影响如\cref{fig:13}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/8/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/8/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/8/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/8/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/8/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{低烈度中期各参数对死亡率影响}
+    \label{fig:13}
+    
+\end{figure}
+
+\subsection{低烈度后期}
+
+对于低烈度传染病传播后期各参数对继续流行50天后的死亡率影响如\cref{fig:14}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/9/rho}
+        \subcaption{$\rho$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/9/T}
+        \subcaption{$T$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/9/beta}
+        \subcaption{$\beta$}
+    \end{minipage}
+
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/9/theta}
+        \subcaption{$\theta$}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{images/9/gamma_q}
+        \subcaption{$\gamma_q$}
+    \end{minipage}
+    \caption{低烈度后期各参数对死亡率影响}
+    \label{fig:14}
+    
+\end{figure}
 
 
+\section{结论}
 
+根据上一节的结果可以看出，及时进行隔离、减少人员接触在哪种情况下都表现出很好的效果。所以，
+不论在那种情况下，及时隔离和注意自身防护都是十分有必要的。
 
 \end{document}
