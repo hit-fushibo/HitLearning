@@ -3,7 +3,9 @@
 *.zip
 *.gtpl
 *.jpg
+!Learning/Database_System/homework/homework3/img/*.jpg
 *.png
+!Learning/Computational_Modeling/homework/img/*.png
 *.pyc
 *.aux
 *.log
