@@ -5,3 +5,5 @@ opencv-python
 scikit-image
 scikit-learn
 jupyter
+pymysql
+PyQt5
