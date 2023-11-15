@@ -187,7 +187,8 @@ class MyWindow(QMainWindow,Ui_MainWindow):
     def Add_class(self):
         id=self.school_id.toPlainText()
         cid=self.add_class_id.toPlainText()
-        err,msg=add_class(self.cur,self.db,id,cid)  
+        name='test'
+        err,msg=add_class(self.cur,self.db,id,cid,name)  
         if not err:
             QMessageBox.information(self, 'Error', msg, QMessageBox.Ok)  # type: ignore
     

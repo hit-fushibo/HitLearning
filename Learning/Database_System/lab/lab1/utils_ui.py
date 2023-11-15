@@ -594,7 +594,7 @@ def query_classes(cursor,db,id):
         schools_name.append(schools[i][1])
     return 1,[schools_id,schools_name]
 
-def add_class(cursor,db,id,class_id):
+def add_class(cursor,db,id,class_id,class_name):
 
     '''
     Legal and Existence check
@@ -627,7 +627,7 @@ def add_class(cursor,db,id,class_id):
     '''
     insert into classes table
     '''
-    sql='INSERT INTO classes(ID) VALUES(\''+class_id+'\')'
+    sql='INSERT INTO classes(ID,name) VALUES(\''+class_id+'\',\''+class_name+'\')'
     try:
         cursor.execute(sql)
         
@@ -1099,7 +1099,7 @@ def add_course(cursor,db,id,course_id,course_name,classroom_id):
     get classroom
     '''
     #get schoolID
-    schoolid=''
+    school_id=''
     sql='SELECT schoolID FROM teach WHERE teacherID=\''+id+'\''
     try:
         cursor.execute(sql)
@@ -1166,7 +1166,8 @@ def add_course(cursor,db,id,course_id,course_name,classroom_id):
         # print()
         db.rollback()
         return 0,'add teach_course relationship error! raw sql:'+sql
-
+    return 1,1
+    
 def del_course(cursor,db,id,course_id):
    
     '''
@@ -1254,7 +1255,7 @@ def del_course(cursor,db,id,course_id):
         # print('error! del_course-del course. raw sql:',sql)
         db.rollback()
         return 0,'error! del_course-del course. raw sql:'+sql
-    return
+    return 1,1
     
 def free_classroom_query(cursor,db,id):
     '''
