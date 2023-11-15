@@ -10,7 +10,6 @@ def having(cursor,db):
     try:
         cursor.execute(sql)
         students=cursor.fetchall()
-        # print(students)
         for i in range(len(students)):
             studentID_list.append(students[i][0])
             studentname_list.append(students[i][1])
@@ -563,7 +562,6 @@ def del_student(cursor,db,id=None):
         print('error! del_student-del students. raw sql:',sql)
         db.rollback()
         return
-    # db.rollback()
     
 
 '''
@@ -1387,7 +1385,6 @@ def select_course(cursor,db):
     try:
         cursor.execute(sql)
         courses=cursor.fetchall()
-        # print(courses)
         for i in range(len(courses)):
             coursesID_list.append(courses[i][0])
             coursesname_list.append(courses[i][1])
@@ -1395,9 +1392,6 @@ def select_course(cursor,db):
         print('error!select_course-get courses list. raw sql:',sql)
         return
     print('The courses can be selected are as follows:')
-    # print(coursesID_list)
-    # print(coursesname_list)
-    # return
     for i in range(len(coursesID_list)):
         print(coursesID_list[i],coursesname_list[i])    
     
@@ -1572,7 +1566,6 @@ def borrow_book(cursor,db):
     try:
         cursor.execute(sql)
         books=cursor.fetchall()
-        # print(courses)
         for i in range(len(books)):
             booksID_list.append(books[i][0])
             booksname_list.append(books[i][1])
