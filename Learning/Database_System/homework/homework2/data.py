@@ -23,7 +23,7 @@ def generate_dno():
 # 创建员工数据
 employees = []
 for i in range(1, 51):
-    ename = '员工' + str(i)
+    ename = 'E' + str(i)
     essn = generate_ssn()
     address = generate_address()
     salary = generate_salary()
@@ -42,7 +42,7 @@ def generate_start_date():
 # 创建部门数据
 departments = []
 for i in range(1, 6):
-    dname = '部门' + str(i)
+    dname = 'D' + str(i)
     dnember = '{:03d}'.format(i)
     mgrssn = generate_ssn()
     mgrstartdate = generate_start_date()
@@ -51,9 +51,9 @@ for i in range(1, 6):
 # 创建工程数据
 projects = []
 for i in range(1, 11):
-    pname = '工程' + str(i)
-    pno = 100 + i
-    plocation = '地址' + str(i)
+    pno = 'P' + str(i)
+    pname = 100 + i
+    plocation = 'Address' + str(i)
     dno = '{:03d}'.format(random.randint(1, 5))
     projects.append({'PNAME': pname, 'PNO': pno, 'PLOCATION': plocation, 'DNO': dno})
 
@@ -72,13 +72,13 @@ writer=pd.ExcelWriter('Learning/Database_System/homework/homework2/data.xlsx')
 
 
 df = pd.DataFrame(employees)
-df.to_excel(writer, sheet_name='员工表', index=False)
+df.to_excel(writer, sheet_name='E', index=False)
 df = pd.DataFrame(departments)
-df.to_excel(writer, sheet_name='部门表', index=False)
+df.to_excel(writer, sheet_name='D', index=False)
 df = pd.DataFrame(projects)
-df.to_excel(writer, sheet_name='工程表', index=False)
+df.to_excel(writer, sheet_name='P', index=False)
 df = pd.DataFrame(work_records)
-df.to_excel(writer, sheet_name='工作表', index=False)
+df.to_excel(writer, sheet_name='W', index=False)
 
 writer.close()
 
@@ -88,8 +88,8 @@ writer.close()
 workbook = openpyxl.load_workbook('Learning/Database_System/homework/homework2/data.xlsx')
 
 # 获取sheet1和sheet2
-sheet1 = workbook['员工表']
-sheet2 = workbook['工作表']
+sheet1 = workbook['E']
+sheet2 = workbook['W']
 
 # 遍历sheet1中的每一行，将ESSN列的数据复制到sheet2中对应行的ESSN列
 for row in range(2, sheet1.max_row + 1):
@@ -97,8 +97,8 @@ for row in range(2, sheet1.max_row + 1):
     sheet2.cell(row=row, column=1, value=essn_value)   # type: ignore # 将该值写入sheet2中对应行的ESSN列
 
 # 获取sheet1和sheet2
-sheet2 = workbook['员工表']
-sheet1 = workbook['部门表']
+sheet2 = workbook['E']
+sheet1 = workbook['D']
 
 # 遍历sheet2中的每一行，根据DNO列的值在SUPERSSN列填入在sheet1中DNEMBER列取值相同行的MGRSSN列的值
 for row in range(2, sheet2.max_row + 1):

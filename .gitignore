@@ -12,6 +12,7 @@
 *.gz
 *.out
 *.dll
+*.xlsx
 .vscode/
 go/bin
 go/pkg
