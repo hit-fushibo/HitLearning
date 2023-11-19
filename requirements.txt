@@ -1,5 +1,7 @@
 numpy
 matplotlib
+pandas
+openpyxl
 scipy
 opencv-python
 scikit-image
