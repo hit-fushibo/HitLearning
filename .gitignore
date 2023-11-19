@@ -18,5 +18,5 @@ go/pkg
 go/src/github.com
 Learning/Computer_Network/lab1/cache
 Learning/Big_Data_Analysis/lab1/*.txt
-Learning/Big_Data_Intelligence/lab2/
+Learning/Big_Data_Intelligence/lab2/*
 !Learning/Big_Data_Intelligence/lab2/readme.md
