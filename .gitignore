@@ -21,3 +21,5 @@ Learning/Computer_Network/lab1/cache
 Learning/Big_Data_Analysis/lab1/*.txt
 Learning/Big_Data_Intelligence/lab2/*
 !Learning/Big_Data_Intelligence/lab2/readme.md
+Learning/Database_System/homework/homework2/*.txt
+!Learning/Database_System/homework/homework2/homework2.txt

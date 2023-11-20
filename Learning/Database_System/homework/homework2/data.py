@@ -62,7 +62,7 @@ for i in range(1, 11):
 work_records = []
 for i in range(1, 51):
     essn = '{:03d}'.format(i)
-    pno = random.randint(100, 110)
+    pno = 'P'+str(random.randint(1, 10))
     hours = random.randint(0, 10)
     work_records.append({'ESSN': essn, 'PNO': pno, 'HOURS': hours})
     
