@@ -140,8 +140,6 @@ $2^{10-\lceil\\log_2{A}\rceil}$
 
 1.略
 
-2.
-
 流水线特点：
 
 * 流水过程由多个相关的子过程组成，这些子过程称为流水线的“ 级”或“ 段”。段的数目称为流水线的“ 深度”
@@ -149,22 +147,213 @@ $2^{10-\lceil\\log_2{A}\rceil}$
 * 各功能段的时间应基本相等，通常为1个时钟周期（ 1拍）
 * 流水线需要经过一定的通过时间才能稳定
 * 流水技术适合于大量重复的时序过程
-
-3.
-
 * 预测分支失败：流水线照常流动，如果分支成功则要清空流水线，重新取值执行
 * 预测分支成功：始终预测分支成功，直接从目标处取值执行
 * 延迟分支：分支开销为n的分支指令后紧跟有n个延迟槽，遇到分支指令时正常处理并执行延迟槽中指令，减少分支开销。
 
-4.
-
 ![1700540343088](https://file+.vscode-resource.vscode-cdn.net/d%3A/code/Learning/Computer_Architecture/note/images/1700540343088.png)
-
-5.
 
 ![1700541487798](images/1700541487798.png)
 
 12个指令周期
+
+## 第四章
+
+1.略
+
+2.略
+
+```text
+LD 	F0,0(R1)
+LD 	F1,-8(R1)
+MULTD 	F0,F0,F2
+NULTD 	F1,F1,F2
+LD 	F4,0(R2)
+LD 	F5-8(R2)
+ADDD 	F0,F0,F4
+ADDD 	F1,F1,F5
+SUBI 	R1,R1,16 #op到sd操作有两个延迟
+SD 	0(R2),F0
+SD 	-8(R2),F1
+BNEQZ 	R1,LOOP
+SUBI 	R2,R2,16  #注意延迟槽
+```
+
+（1）失效开销=命中但是预测错误开销+不命中开销
+
+CPI=1+15%\*(90%\*10%\*4+10%\*3)=1.099
+
+（2）固定两个时延的策略CPI=1+15%\*2=1.3
+
+所以分支目标缓冲更快
+
+失效开销=不命中时间
+
+CPI=1+5%\*(10%*3)=1.015
+
+这里不命中开销沿用上题
+
+（1）
+
+```text
+LD
+STALL
+MULTD
+LD
+STALL
+STALL
+ADDD
+STALL
+STALL
+SD
+ADDI
+ADDI
+SGTI
+BEQZ
+```
+
+14个周期，5个空转周期
+
+（2）
+
+循环展开时，控制部分不需要重复执行，即（1）中11-14行只用执行一遍，而1-10行需要重复执行，并且重复执行之间不需要插入空转周期，所以一共需要10\*4+4=44个周期，而空转周期为5\*4=20，计算一个Y需要11个周期，加速比=14/11，通过减少控制指令的开销获得的
+
+（3）
+
+```text
+LD
+LD
+LD
+LD
+MULTD
+MULTD
+MULTD
+MULTD
+LD
+LD
+LD
+LD
+ADDD
+ADDD
+ADDD
+ADDD
+SD
+SD
+SD
+SD
+ADDI 
+ADDI 
+SGTI
+BEQZ #这里不需要放延迟槽是因为分支延迟为0
+```
+
+（4）注意：分支操作完成后才能进行确认，以及CDB的竞争。这里的执行时延取决于指令与指令所需数据来源的指令在表中的时延，比如：第一个ld在3拍将数据传给multd，而ld后的multd有一拍的时延，所以直到第4拍才执行
+
+| 指令  | 流出 | 执行 | 写回 | 确认 |
+| ----- | ---- | ---- | ---- | ---- |
+| ld    | 1    | 2    | 3    | 4    |
+| multd | 2    | 4    | 5    | 6    |
+| ld    | 3    | 4    | 6    | 7    |
+| addd  | 4    | 7    | 8    | 9    |
+| sd    | 5    | 10   | 11   | 12   |
+| addi  | 6    | 7    | 8    |      |
+| addi  | 7    | 8    | 9    |      |
+| sgti  | 8    | 9    | 10   |      |
+| beqz  | 9    | 10   |      |      |
+| ld    | 10   | 11   | 12   | 13   |
+| multd | 11   | 13   | 14   | 15   |
+| ld    | 12   | 13   | 15   | 16   |
+| addd  | 13   | 16   | 17   | 18   |
+| sd    | 14   |      |      |      |
+| addi  | 15   | 16   | 17   |      |
+| addi  | 16   | 17   | 18   |      |
+| sgti  | 17   | 18   |      |      |
+| beqz  | 18   |      |      |      |
+
+ROB
+
+（5）
+
+| 整数 | 浮点  | 时钟 |
+| ---- | ----- | ---- |
+| ld   |       | 1    |
+| ld   |       | 2    |
+| ld   | multd | 3    |
+| ld   | multd | 4    |
+| ld   | multd | 5    |
+| ld   | multd | 6    |
+| ld   | addd  | 7    |
+| ld   | addd  | 8    |
+| addi | addd  | 9    |
+| sd   | addd  | 10   |
+| sd   |       | 11   |
+| sd   |       | 12   |
+| sd   |       | 13   |
+| addi |       | 14   |
+| sgti |       | 15   |
+| beqz |       | 16   |
+
+（6）
+
+| 访存1 | 访存2 | 浮点1 | 浮点2 | 整数 | 时钟 |
+| ----- | ----- | ----- | ----- | ---- | ---- |
+| ld    | ld    |       |       |      | 1    |
+| ld    | ld    |       |       |      | 2    |
+| ld    | ld    | multd | multd | addi | 3    |
+| ld    | ld    | multd | multd |      | 4    |
+|       |       | addd  | addd  | addi | 5    |
+|       |       | addd  | addd  | sgti | 6    |
+|       |       |       |       | beqz | 7    |
+| sd    | sd    |       |       |      | 8    |
+| sd    | sd    |       |       |      | 9    |
+
+（1）
+
+| 访存 | 运算 | 时钟 |
+| :--: | ---- | :--: |
+|  LW  |      |  1  |
+|  LW  |      |  2  |
+|      |      |  3  |
+|      |      |  4  |
+|  LD  | ADD  |  5  |
+|      | MUL  |  6  |
+|  SW  | SUB  |  7  |
+|  SW  | MUL  |  8  |
+|      |      |  9  |
+|  SW  |      |  10  |
+
+（2）
+
+| 1   | 2   | 时钟 |
+| --- | --- | ---- |
+| LW  | LW  | 1    |
+|     |     | 2    |
+|     |     | 3    |
+| ADD | LD  | 4    |
+| SUB | MUL | 5    |
+| SW  | MUL | 6    |
+|     |     | 7    |
+| SW  | SW  | 8    |
+
+（3）
+
+|  1  |  2  | 时钟 |
+| :-: | :-: | :--: |
+| LW | LW |  1  |
+| ADD | LD |  2  |
+| MUL | SUB |  3  |
+| SW | MUL |  4  |
+| SW | SW |  5  |
+
+8.
+
+
+![1700662867059](https://file+.vscode-resource.vscode-cdn.net/d%3A/code/Learning/Computer_Architecture/note/images/1700662867059.png)
+
+![1700662881397](https://file+.vscode-resource.vscode-cdn.net/d%3A/code/Learning/Computer_Architecture/note/images/1700662881397.png)
+
+![1700662925648](https://file+.vscode-resource.vscode-cdn.net/d%3A/code/Learning/Computer_Architecture/note/images/1700662925648.png)
+
 
 # 附录
 
