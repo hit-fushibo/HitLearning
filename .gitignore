@@ -1,11 +1,13 @@
+#########################################################
+# ignore
+
+# file type
 *.exe
 *.pdf
 *.zip
 *.gtpl
 *.jpg
-!Learning/Database_System/homework/homework3/img/*.jpg
 *.png
-!Learning/Computational_Modeling/homework/img/*.png
 *.pyc
 *.aux
 *.log
@@ -13,13 +15,31 @@
 *.out
 *.dll
 *.xlsx
+Learning/Big_Data_Analysis/lab1/*.txt
+Learning/Big_Data_Intelligence/lab2/*
+Learning/Database_System/homework/homework2/*.txt
+
+# folder
 .vscode/
 go/bin
 go/pkg
 go/src/github.com
 Learning/Computer_Network/lab1/cache
-Learning/Big_Data_Analysis/lab1/*.txt
-Learning/Big_Data_Intelligence/lab2/*
+
+
+
+
+##########################################################
+# not ignore
+
+# readme
 !Learning/Big_Data_Intelligence/lab2/readme.md
-Learning/Database_System/homework/homework2/*.txt
+
+# note
+!Learning/Computer_Architecture/note/note.pdf
+!Learning/Computer_Network/note/Computer_Network.pdf
+
+# homework
 !Learning/Database_System/homework/homework2/homework2.txt
+!Learning/Database_System/homework/homework3/img/*.jpg
+!Learning/Computational_Modeling/homework/img/*.png
