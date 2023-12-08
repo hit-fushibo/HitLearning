@@ -49,3 +49,22 @@
 ![1702045563863](images/1702045563863.png)
 
 修改时间片后，发现利用率降低了，原因可能是时间片分配的过大导致实际上程序执行完毕后要等一会才能切换。
+
+## 修改的文件
+
+./code/linux-0.11/kernel/exit.c
+
+./code/linux-0.11/kernel/fork.c
+
+./code/linux-0.11/init/main.c
+
+./code/linux-0.11/kernel/sched.c
+
+./code/linux-0.11/kernel/printk.c
+
+## 输出文件
+
+| 文件                   | 含义                      |
+| ---------------------- | ------------------------- |
+| ./code/process_15.log  | 正常情况下输出文件        |
+| ./code/process_150.log | 修改时间片为150后输出文件 |
