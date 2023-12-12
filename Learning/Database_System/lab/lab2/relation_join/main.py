@@ -17,7 +17,7 @@ sort_sorted_dir = 'Learning/Database_System/lab/lab2/relation_join/disk/sort/sor
 
 def relation_select(buf: extmem.Buf):
     '''
-    线性搜索R.A=40或S.C=60的元组
+    R.A=40 or S.C=60
     '''
     if os.path.exists(select_dir):
         for file in os.listdir(select_dir):
@@ -225,7 +225,6 @@ def Hash_Join(buf: extmem.Buf):
                         num += 1
         buf.freeBlockInBuffer(S_index)
     if len(res) > 0:
-        # print(1)
         w_index = buf.getNewBlockBuffer()
         buf.data[w_index] = res
         buf.writeBlockToDisk(w_index, hash_dir+'j'+str(num)+'.blk')
@@ -257,7 +256,6 @@ def Sort_Merge_Join(buf: extmem.Buf):
     # R
     num = 16/8
     for i in range(int(num)):
-        # print(11)
         data = []
         for j in range(8):
 
@@ -266,10 +264,8 @@ def Sort_Merge_Join(buf: extmem.Buf):
             data += buf.data[index]
 
         data = sorted(data, key=lambda a: int(a.split(' ')[0]))
-        # print(len(data))
         for j in range(8):
             buf.data[j] = data[j*7:j*7+7]
-            # print(buf.data[j])
             buf.writeBlockToDisk(j, sort_temp_dir+'r'+str(i)+str(j)+'.blk')
 
     num1 = 0
@@ -450,7 +446,6 @@ def Sort_Merge_Join(buf: extmem.Buf):
             # output buffer full,write to disk
             if len(buf.data[index_res]) == 7:
                 file_res = sort_sorted_dir+'s'+str(num_res)+'.blk'
-                # print(buf.data[index_res])
                 buf.writeBlockToDisk(index_res, file_res)
                 num_res += 1
                 flag_res = 0
@@ -550,7 +545,7 @@ def Sort_Merge_Join(buf: extmem.Buf):
                 R_index = buf.readBlockFromDisk(R_file)
 
         elif int(buf.data[R_index][0].split(' ')[0]) > int(buf.data[S_index][0].split(' ')[0]):
-            # print(3,buf.data[R_index][0].split(' ')[0],buf.data[S_index][0].split(' ')[0])
+            
             buf.data[S_index].pop(0)
             if not buf.data[S_index]:
                 buf.freeBlockInBuffer(S_index)
@@ -560,7 +555,7 @@ def Sort_Merge_Join(buf: extmem.Buf):
                 S_file = sort_sorted_dir+'s'+str(S_num)+'.blk'
                 S_index = buf.readBlockFromDisk(S_file)
         else:
-            # print(4,buf.data[R_index][0].split(' ')[0],buf.data[S_index][0].split(' ')[0])
+            
             buf.data[R_index].pop(0)
             if not buf.data[R_index]:
                 buf.freeBlockInBuffer(R_index)

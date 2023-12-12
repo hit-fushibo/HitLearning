@@ -69,13 +69,13 @@ def Query_Optimize(root: Tree, info_lst=None):
 
 if __name__ == '__main__':
     for query_ in queries:
-        root1=Create_tree(query_)
-        root2=Query_Optimize(root1)
         print('************************************************************')
         print(query_)
         print('-------------')
         print('未优化')
+        root1=Create_tree(query_)
         Output_tree(root1)
+        root2=Query_Optimize(root1)
         print('-------------')
         print('优化')
         Output_tree(root2) # type: ignore
