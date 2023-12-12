@@ -329,8 +329,12 @@ def Sort_Merge_Join(buf: extmem.Buf):
                     num_res += 1
                     index_res = buf.getNewBlockBuffer()
             while True:
-                index2 = buf.readBlockFromDisk(
-                    sort_temp_dir+'r'+str(1)+str(num2)+'.blk')
+                if num2 == 8:
+                    if buf.data[index_res]:
+                        buf.writeBlockToDisk(
+                            index_res, sort_sorted_dir+'r'+str(num_res)+'.blk')
+                    break
+                index2 = buf.readBlockFromDisk(sort_temp_dir+'r'+str(1)+str(num2)+'.blk')
                 num2 += 1
                 print(buf.data[index2])
                 for data in buf.data[index2]:
@@ -341,11 +345,7 @@ def Sort_Merge_Join(buf: extmem.Buf):
                         num_res += 1
                         index_res = buf.getNewBlockBuffer()
                 buf.freeBlockInBuffer(index2)
-                if num2 == 8:
-                    if buf.data[index_res]:
-                        buf.writeBlockToDisk(
-                            index_res, sort_sorted_dir+'r'+str(num_res)+'.blk')
-                    break
+                
             break
         else:
             # load new block

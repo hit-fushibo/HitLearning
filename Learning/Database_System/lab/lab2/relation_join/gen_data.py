@@ -1,7 +1,11 @@
 from extmem import *
-
+import os
 disk_dir = 'Learning/Database_System/lab/lab2/relation_join/disk/relation/'
-
+if os.path.exists(disk_dir):
+    for file in os.listdir(disk_dir):
+        os.remove(disk_dir+file)
+else:
+    os.mkdir(disk_dir)
 def generate_data():
     if os.path.exists(disk_dir):
         file_dir=disk_dir
@@ -50,7 +54,7 @@ def wirte_disk(r,s):
             line=str(r[i][j][0])+' '+str(r[i][j][1])+'\n'
             lines.append(line)
         lines[-1]=lines[-1][:-1]
-        print(file)
+        # print(file)
         with open(file,'w') as f:
             f.writelines(lines)
         f.close()
